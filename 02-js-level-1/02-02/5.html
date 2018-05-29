@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        .clearfix{
+            clear:both;
+            }
+        .clearfix:after{
+            content:'';
+            display:table;
+            *zoom:1;
+            clear:both;
+            overflow:hidden;
+            }
+        li{list-style:none;float:left;}
+        a{text-decoration:none;color:#fff;}
+        .wrapper{
+            width:936px;
+            margin:0 auto;
+            }
+        #box{
+            background:#000;
+            position:relative;
+            width:100%;
+            }
+        
+        #box > li > a{
+            line-height:36px;
+            padding:0 20px;
+            display:block;
+            }
+        #box > li > a.active{
+            background:red;
+            }
+        #box > li > a:hover{
+            background:red;
+            }
+        #box ul{
+            background:red;
+            position:absolute;
+            left:0;
+            top:36px;
+            width:100%;	
+            line-height:32px;
+            display: none;
+        }        
+        #box ul li a{
+        border-right:1px solid #fff;
+        padding:0 20px;	
+        }
+        #box ul li:last-child a{
+        border-right:0px solid #fff;
+        padding:0 20px;	
+        }
+        #box ul li a:hover{
+        text-decoration:underline;
+        }
+        </style>
+        </head>
+        
+        <body>
+        <div class="wrapper">
+            <ul id="box" class="clearfix">
+                <li>
+                    <a href="#" >首页</a>        	
+                </li>
+                <li>
+                    <a href="#" >服饰</a>
+                    <ul>
+                        <li><a href="#" >服饰</a></li>
+                        <li><a href="#" >服饰</a></li>
+                        <li><a href="#" >服饰</a></li>
+                        <li><a href="#" >服饰</a></li>
+                        <li><a href="#" >服饰</a></li>
+                        <li><a href="#" >服饰</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >美容</a>
+                    <ul>
+                        <li><a href="#" >美容</a></li>
+                        <li><a href="#" >美容</a></li>
+                        <li><a href="#" >美容</a></li>
+                        <li><a href="#" >美容</a></li>
+                        <li><a href="#" >美容</a></li>
+                        <li><a href="#" >美容</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >偶像</a>
+                    <ul>
+                        <li><a href="#" >偶像</a></li>
+                        <li><a href="#" >偶像</a></li>
+                        <li><a href="#" >偶像</a></li>
+                        <li><a href="#" >偶像</a></li>
+                        <li><a href="#" >偶像</a></li>
+                        <li><a href="#" >偶像</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >乐活</a>
+                    <ul>
+                        <li><a href="#" >乐活</a></li>
+                        <li><a href="#" >乐活</a></li>
+                        <li><a href="#" >乐活</a></li>
+                        <li><a href="#" >乐活</a></li>
+                        <li><a href="#" >乐活</a></li>
+                        <li><a href="#" >乐活</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >男士</a>
+                    <ul>
+                        <li><a href="#" >男士</a></li>
+                        <li><a href="#" >男士</a></li>
+                        <li><a href="#" >男士</a></li>
+                        <li><a href="#" >男士</a></li>
+                        <li><a href="#" >男士</a></li>
+                        <li><a href="#" >男士</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >健康</a>
+                    <ul>
+                        <li><a href="#" >健康</a></li>
+                        <li><a href="#" >健康</a></li>
+                        <li><a href="#" >健康</a></li>
+                        <li><a href="#" >健康</a></li>
+                        <li><a href="#" >健康</a></li>
+                        <li><a href="#" >健康</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >视觉</a>
+                    <ul>
+                        <li><a href="#" >视觉</a></li>
+                        <li><a href="#" >视觉</a></li>
+                        <li><a href="#" >视觉</a></li>
+                        <li><a href="#" >视觉</a></li>
+                        <li><a href="#" >视觉</a></li>
+                        <li><a href="#" >视觉</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >视频</a>
+                    <ul>
+                        <li><a href="#" >视频</a></li>
+                        <li><a href="#" >视频</a></li>
+                        <li><a href="#" >视频</a></li>
+                        <li><a href="#" >视频</a></li>
+                        <li><a href="#" >视频</a></li>
+                        <li><a href="#" >视频</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >活动</a>
+                    <ul>
+                        <li><a href="#" >活动</a></li>
+                        <li><a href="#" >活动</a></li>
+                        <li><a href="#" >活动</a></li>
+                        <li><a href="#" >活动</a></li>
+                        <li><a href="#" >活动</a></li>
+                        <li><a href="#" >活动</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >专题</a>
+                    <ul>
+                        <li><a href="#" >专题</a></li>
+                        <li><a href="#" >专题</a></li>
+                        <li><a href="#" >专题</a></li>
+                        <li><a href="#" >专题</a></li>
+                        <li><a href="#" >专题</a></li>
+                        <li><a href="#" >专题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >分享</a>
+                    <ul>
+                        <li><a href="#" >分享</a></li>
+                        <li><a href="#" >分享</a></li>
+                        <li><a href="#" >分享</a></li>
+                        <li><a href="#" >分享</a></li>
+                        <li><a href="#" >分享</a></li>
+                        <li><a href="#" >分享</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" >流行</a>
+                    <ul>
+                        <li><a href="#" >流行</a></li>
+                        <li><a href="#" >流行</a></li>
+                        <li><a href="#" >流行</a></li>
+                        <li><a href="#" >流行</a></li>
+                        <li><a href="#" >流行</a></li>
+                        <li><a href="#" >流行</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <script>
+            var myUl = document.getElementById('box');
+            var lists = myUl.children;
+            var len = lists.length
+            console.log()
+            for(var i = 0; i < len; i++){
+                lists[i].index = i;
+                lists[i].onmouseover = function(){
+                    this.getElementsByTagName('ul')[0].style.display = 'block';
+                    this.getElementsByTagName('a')[0].style.background = 'red';
+                }
+                lists[i].onmouseout = function(){
+                    this.getElementsByTagName('ul')[0].style.display = 'none';
+                    this.getElementsByTagName('a')[0].style.background = '';
+                }	
+            }
+            
+            </script>
+        </div>
+        </body>
+</html>

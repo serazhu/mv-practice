@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        li{
+            list-style: none;
+        }
+        #set{
+            color:#fff;
+            background: red;
+            padding:5px 15px;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            border: 2px solid blue;
+            margin-top: 20px;
+        }
+        #setbox{
+            border: 20px solid #ccc;
+            width: 250px;
+            height: 160px;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate3d(-50%,-50%,0);
+            padding: 20px;
+            z-index: 2;
+            background:#fff;
+            display: none;
+        }
+        #setbox li{
+            line-height: 36px;
+        }
+        #setbox li a{
+            border: 1px solid #ccc;
+            background: #f0f0f0;
+            color: #555;
+            margin-left: 5px;
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            line-height: 30px;
+        }
+        #setbox li a:hover{            
+            background: red;
+        }
+        #setbox li:first-child a:hover{            
+            color: #fff;
+        }
+        #setbox #red:hover{
+            background: red;
+        }
+        #setbox #yellow:hover{
+            background: yellow;
+            color: #000;
+        }
+        #setbox #blue:hover{
+            background: blue;
+        }
+        .opation{
+            text-align: center;
+            margin-top: 20px;
+        }
+        .opation a{
+            color: #fff;
+            background: blue;
+            display: inline-block;
+            width: 50px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #mark{
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.4);
+            z-index: 1;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>请为下面的DIV设置样式:<span id="set">点击设置</span>
+        <div id="box"></div>
+    </div>
+    <div id="setbox">
+        <ul>
+            <li>请选择背景颜色：<a id="red" href="">红</a><a id="yellow" href="">黄</a><a id="blue" href="">蓝</a></li>
+            <li>请选择宽度(px)：<a id="w200" href="">200</a><a id="w300" href="">300</a><a id="w400" href="">400</a></li>
+            <li>请选择高度(px)：<a id="h200" href="">200</a><a id="h300" href="">300</a><a id="h400" href="">400</a></li>
+        </ul>
+        <div class="opation">
+            <a id="rest" href="">恢复</a>
+            <a id="sure" href="">确定</a>
+        </div>               
+    </div>
+    <div id="mark"></div> 
+    <script>
+        var box = document.getElementById('box');
+        var red = document.getElementById('red');
+        var yellow = document.getElementById('yellow');
+        var blue = document.getElementById('blue');
+        var w200 = document.getElementById('w200');
+        var w300 = document.getElementById('w300');
+        var w400 = document.getElementById('w400');
+        var h200 = document.getElementById('h200');
+        var h300 = document.getElementById('h300');
+        var h400 = document.getElementById('h400');
+        var rest = document.getElementById('rest');
+        var sure = document.getElementById('sure');
+        var mark = document.getElementById('mark');
+        var setbox = document.getElementById('setbox');
+        var set = document.getElementById('set');
+
+        red.onclick=function() {
+            box.style.background='red';
+            return false;
+        }
+        yellow.onclick=function() {
+            box.style.background='yellow';
+            return false;
+        }
+        blue.onclick=function() {
+            box.style.background='blue';
+            return false;
+        }
+        w200.onclick=function() {
+            box.style.width='200px';
+            return false;
+        }
+        w300.onclick=function() {
+            box.style.width='300px';
+            return false;
+        }
+        w400.onclick=function() {
+            box.style.width='400px';
+            return false;
+        }
+        h200.onclick=function() {
+            box.style.height='200px';
+            return false;
+        }
+        h300.onclick=function() {
+            box.style.height='300px';
+            return false;
+        }
+        h400.onclick=function() {
+            box.style.height='400px';
+            return false;
+        }
+        rest.onclick=function() {
+            box.style.background='';
+            box.style.width='';
+            box.style.height='';
+            return false;
+        }
+        sure.onclick = function() {
+            mark.style.display='none';
+            setbox.style.display='none';
+            return false;
+        }
+        set.onclick = function() {
+            mark.style.display = 'block';
+            setbox.style.display = 'block';            
+        }        
+    </script>
+</body>
+</html>

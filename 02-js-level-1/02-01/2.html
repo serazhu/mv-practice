@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    li{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+        color: #333;
+    }
+    .clearfix{
+        clear: both;
+    }
+    .clearfix:after{
+        content: '';
+        display: table;
+        *zoom: 1;
+        overflow: hidden;
+        clear: both;
+    }
+    #title li{
+        float: left;                
+    }
+    #title li a{
+        background: orangered;
+        color: #fff;
+        display: block;
+        width: 100px;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 36px;
+        border-radius: 10px 10px 0 0;
+    }
+    #title li a:hover{
+        background: #888;        
+    }
+    #content{
+        border: 1px solid orangered;
+        width: 600px;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    #content li.second,#content li.third{
+        display: none;
+    }
+    #content li.first li{
+        margin-bottom: 10px;
+    }
+    #content li li img{
+        float: left;
+    }
+    #content li li div{
+        float: left;
+        margin-left: 10px;
+    }
+    #content li li a{
+        display: block;
+    }
+    #content li li a:hover{
+        background: #f1f1f1;
+    }
+    #content li.first li img{
+        width: 300px;
+        height: 200px;
+        border-radius: 10px;
+    }  
+    
+   
+    #content li.second li{
+        margin-bottom: 10px;
+    }
+    #content li.second li img{
+        width: 120px;
+        height: 80px;
+        border-radius: 10px;
+    }
+    #content li.third li{
+        border-bottom: 1px dotted orangered;
+        line-height: 28px;
+    }
+    #content li.third li img{
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        margin-top: 4px;
+    }    
+    </style>
+</head>
+<body>
+    <ul id="title" class="clearfix">
+        <li><a href="">大图展示</a></li>
+        <li><a href="">小图展示</a></li>
+        <li><a href="">列表图展示</a></li>
+    </ul>
+    <ul id="content">
+        <li class="first">
+            <ul>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/1.jpg" alt="">
+                        <div>
+                            <h1>11111</h1>
+                            <h2>111111111111111111111</h2>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/2.jpg" alt="">
+                        <div>
+                            <h1>22222</h1>
+                            <h2>22222222222222222222</h2>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">                    
+                        <img src="images/3.jpg" alt="">
+                        <div>
+                            <h1>33333</h1>
+                            <h2>33333333333333333333</h2>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/4.jpg" alt="">
+                        <div>
+                            <h1>44444</h1>
+                            <h2>44444444444444444444</h2>
+                        </div>
+                    </a>
+                </li>
+                
+            </ul>
+           
+        </li>
+        <li class="second">
+             <ul>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/1.jpg" alt="">
+                        <div>
+                            <h3>111111</h3>
+                            <p>111111111111111111111111</p>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/2.jpg" alt="">
+                        <div>
+                            <h3>22222</h3>
+                            <p>22222222222222222222</p>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/3.jpg" alt="">
+                        <div>
+                            <h3>33333</h3>
+                            <p>33333333333333333333</p>
+                        </div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/4.jpg" alt="">
+                        <div>
+                            <h3>444444</h3>
+                            <p>444444444444444444</p>
+                        </div>
+                    </a>                    
+                </li>
+            </ul>
+        </li>
+        <li class="third">
+            <ul>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/1.jpg" alt="">
+                        <div><p>1111111111111111111111111111</p></div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/2.jpg" alt="">
+                        <div><p>1111111111111111111111111111</p></div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/3.jpg" alt="">
+                        <div><p>1111111111111111111111111111</p></div>
+                    </a>                    
+                </li>
+                <li>
+                    <a class="clearfix" href="">
+                        <img src="images/4.jpg" alt="">
+                        <div><p>1111111111111111111111111111</p></div>
+                    </a>                    
+                </li>                
+            </ul>
+        </li>
+    </ul>
+    <script>
+        var title =document.getElementById('title');
+        var titles = title.getElementsByTagName('li');
+        var content = document.getElementById('content');
+        var lists = content.children;
+        for(var i = 0, len = titles.length; i < len; i++){
+            titles[i].index = i;
+            titles[i].onclick = function(e){                
+                for(var l = 0, len = titles.length; l < len; l++ ){
+                    lists[l].style.display = 'none';
+                }
+                lists[this.index].style.display = 'block';
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

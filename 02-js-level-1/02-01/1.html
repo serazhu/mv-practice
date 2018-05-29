@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .clearfix{
+            clear: both;
+        }
+        .clearfix::after{
+            clear: both;
+            content: '';
+            display: table;
+            zoom: 1;
+            overflow: hidden;
+        }
+        body{
+            font-size: 12px;
+        }
+        li{
+            list-style: none;
+        }
+        .box{
+            width: 289px;
+            height: 594px;
+            background: url(images/phone.jpg) no-repeat;
+            margin: 0 auto;
+            position: relative;
+        }
+        .bar{
+            background: #f1f1f1;
+            height: 47px;
+            position: absolute;
+            bottom: 88px;
+            width: 237px;
+            left: 26px;
+            border-top: 1px solid #ccc;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .bar img{
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #fff;
+            padding:2px;
+            width: 24px;
+            height: 24px;
+                    
+        }
+        .bar input{
+            width: 150px;
+            height: 26px;
+            
+        }
+        .bar button{
+            width: 36px;
+            height: 30px;
+            
+        }
+        #content{
+            position: absolute;
+            top:88px;
+            left:26px;
+            width: 217px;
+            height: 350px;
+            background: #fff;
+            padding: 10px;
+            overflow: auto;
+        }
+        #content li{
+            margin-bottom: 8px;
+        }
+        #content li.one div{
+            width: 150px;
+            float: left;
+            background: #ccc;
+            padding:8px;
+            line-height: 16px;
+            margin-left: 5px;
+            word-wrap:break-word;
+            border-radius: 3px;
+        }
+        #content li.one img{           
+            float: left;
+        }
+        #content li.two div{
+            width: 150px;
+            float: right;
+            background: #21c618;
+            padding:8px;
+            line-height: 16px;
+            margin-right: 5px;
+            color: #fff;
+            word-wrap:break-word;
+            border-radius: 3px;
+        }
+        #content li.two img{           
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="bar">
+            <img id="img" src="images/face1.jpg" alt="">
+            <input id="input" type="text">
+            <button id="button">发送</button>
+        </div>
+        <div id="content">
+            <ul>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var off = true;
+        var img = document.getElementById('img');
+        var button = document.getElementById('button');
+        var input = document.getElementById('input');
+        var content = document.getElementById('content');
+
+        img.onclick = function(){
+            if(off){
+                img.src = 'images/face2.jpg';
+                off = !off;
+            }else{
+                img.src = 'images/face1.jpg';
+                off = !off;
+            }
+        }
+
+        if(!input.value){
+            button.disabled = 'disabled';
+        }
+
+        input.oninput = function(){
+            button.disabled = '';
+        }
+
+        button.onclick = function(){
+            if(off){
+                content.innerHTML = '<li class="one clearfix"><img src="images/face1.jpg" alt=""><div>' + input.value + '</div></li>' + content.innerHTML;
+                input.value = '';
+            }else{
+                content.innerHTML = '<li class="two clearfix"><img src="images/face2.jpg" alt=""><div>' + input.value + '</div></li>'  + content.innerHTML;
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

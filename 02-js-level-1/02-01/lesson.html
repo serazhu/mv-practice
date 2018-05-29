@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .red{
+        background: red;
+        color: #fff;
+        border: 3px solid #ccc;
+        padding: 10px;
+        width: 400px;
+    }
+    .yellow{
+        background: yellow;
+        color: #333;
+        border: 3px solid #ccc;
+        padding: 10px;
+        width: 400px;
+    }
+
+    #box{
+        width: 300px;
+        height: 200px;
+        border: 1px solid #000;
+        margin-top: 10px;
+    }
+    </style>
+</head>
+<body>
+    <p id="p" style="font-size: 14px">
+    本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。本文介绍了，script元素的属性、script标签在文档位置、动态加载js的方法。
+    </p>
+    <button id="add">+</button>
+    <button id="decrease">-</button>
+    <button id="red">red</button>
+    <button id="yellow">yellow</button>
+
+    <div>
+        <h1>添加元素属性</h1>
+        <label for="">设置属性：</label><input id="input1" type="text">
+        <label for="">设置属性值：</label><input id="input2" type="text">
+        <button id="mybutton">添加</button>
+        <div id="box"></div>
+    </div>
+    <script>
+        var p = document.getElementById('p');
+        var add = document.getElementById('add');
+        var decrease = document.getElementById('decrease');
+        var red = document.getElementById('red');
+        var yellow = document.getElementById('yellow');
+
+        var num = parseInt(p.style.fontSize);
+        console.log(num);
+        add.onclick = function(){
+            num++;
+            p.style.fontSize = num + 'px';
+        }
+        decrease.onclick = function(){            
+            if(num > 10){
+                num--;
+                p.style.fontSize = num + 'px';
+            }
+        }
+        red.onclick = function(){
+            p.className = 'red';
+        }
+        yellow.onclick = function(){
+            p.className = 'yellow';
+        }
+
+        // 添加元素属性
+        var input1 = document.getElementById('input1');
+        var input2 = document.getElementById('input2');
+        var mybutton = document.getElementById('mybutton');
+        var box = document.getElementById('box');        
+        
+        mybutton.onclick = function(){
+            var value1 = input1.value;
+            var value2 = input2.value;
+            if(!(value1 && value2)){
+                alert('请输入内容')
+            }else{
+                box.style[value1] = value2;
+            }
+        }
+    </script>
+</body>
+</html>

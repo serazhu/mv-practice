@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{padding:0;margin:0;}
+li{list-style:none;}
+a{
+	text-decoration:none;
+	}
+.clearfix{
+	clear:both;
+	}
+.clearfix:after,.clearfix:before{
+	content:'';
+	display:table;
+	clear:both;
+	overflow:hidden;
+	*zoom:1;
+	}
+.wrapper{
+	width:500px;
+	margin:0 auto;
+	background:#ddd;
+	padding:20px 50px 60px;
+	}
+.imgbox{
+	width:400px;
+	height:300px;
+	position:relative;
+	margin:0 auto;
+	}
+.imgbox img{
+	width:100%;
+	height:100%;
+	}
+#pre{
+	
+	left:10px;
+	}
+#next{
+	
+	right:10px;
+	}
+.imgbox a{
+	position:absolute;
+	font-size:40px;
+	color:#fff;
+	font-weight:bold;
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	background:#F93;
+	text-align:center;
+	line-height:50px;
+	top:50%;
+	transform:translateY(-50%);
+	opacity:0.7;
+	filter:opacity(70);
+	}
+.imgbox a:hover{
+	opacity:1;
+	filter:opacity(100);
+	transition:all .6s;
+}
+.small ul{
+	text-align:center;
+	width:160px;
+	margin: 10px auto;
+	}
+.small li{
+	width:16px;
+	height:16px;
+	float:left;
+	margin:0 8px;
+	position:relative;
+	}
+.small a{
+	background:#aaa;
+	display:block;
+	width:100%;
+	height:100%;
+	border-radius:50%;
+	}
+.small a:hover{
+	background:#555;	
+	}
+.small a.active{
+	background:#555;	
+	}
+.small img{
+	width:80px;
+	height:60px;	
+	border:5px solid #fff;
+	}
+.small div{
+	display:none;
+	position:absolute;
+	left:-38px;
+	bottom:22px;	
+	}
+.small div:after{
+	border:8px solid transparent;
+	border-top-color:#fff;
+	content:'';
+	position:absolute;
+	bottom:-13px;
+	left:50%;
+	transform:translateX(-50%);
+	}
+
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<h1>带缩略图的图片轮播</h1>
+    <div class="imgbox">
+    	<img id="img" src="images/1.jpg" />
+    	<a id="pre" href="#"><</a>
+        <a id="next" href="#">></a>
+    </div>
+    <div class="small">
+    	<ul class="clearfix">
+        	<li>
+            	<a href="@"></a>
+                <div><img src="images/1.jpg" /></div>
+            </li>
+            <li>
+            	<a href="@"></a>
+                <div><img src="images/2.jpg" /></div>
+            </li>
+            <li>
+            	<a href="@"></a>
+                <div><img src="images/3.jpg" /></div>
+            </li>
+            <li>
+            	<a href="@"></a>
+                <div><img src="images/4.jpg" /></div>
+            </li>
+            <li>
+            	<a href="@"></a>
+                <div><img src="images/5.jpg" /></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+var myUl = document.getElementsByTagName('ul')[0];
+var lists = myUl.getElementsByTagName('li');
+var img = document.getElementById('img');
+var pre = document.getElementById('pre');
+var next = document.getElementById('next');
+var len = lists.length;
+var num = 0;
+var arr = ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg'];
+for(var i = 0; i < len; i++){
+	lists[i].index = i;
+	lists[i].onmouseover = function(){
+		this.getElementsByTagName('div')[0].style.display = 'block';	
+	}
+	lists[i].onmouseout = function(){
+		this.getElementsByTagName('div')[0].style.display = 'none';	
+	}
+	lists[i].onclick = function(){
+		for(var j = 0; j < len; j++){
+			lists[j].getElementsByTagName('a')[0].className = '';
+		}
+		this.getElementsByTagName('a')[0].className = 'active';	
+		img.src = arr[this.index];
+		return false;
+	}
+}
+
+next.onclick = function(){
+	num++;
+	click();
+}
+pre.onclick = function(){
+	num--;
+	click();
+}
+function click(){
+	if(num >= len){
+		num = 0;	
+	}
+	if(num < 0){
+		num = len - 1;	
+	}	
+	lists[num].onclick();	
+}
+click();
+</script>
+</body>
+</html>
