@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自动生成100个li</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            }
+        ul{
+            position:relative;
+            }
+        li{
+            width:100px;
+            height:100px;	
+            list-style:none;
+            font-size:36px;
+            text-align:center;
+            line-height:100px;
+            position:absolute;
+            border:1px solid #000;
+            }
+        </style>
+        </head>
+        
+        <body>
+        <button id="btn">自动生成100个li</button>
+        <ul id="box"></ul>
+        <script>
+        var btn = document.getElementById('btn');
+        var myUl = document.getElementById('box');
+        var lists = document.getElementsByTagName('li');
+        
+        var colors = ['red','yellow','blue','green'];
+        var len = colors.length;
+        var lists = document.getElementsByTagName('li');
+        var onOff = true;
+        
+        btn.onclick = function(){
+            if(onOff){
+              var str = '';
+              for(var i = 0; i < 100; i++){
+                  str += '<li>' + i + '</li>';	
+              }	
+              myUl.innerHTML = str;
+              var myLen = document.getElementsByTagName('li').length;
+              for(var j = 0; j < myLen; j++){
+                  lists[j].style.left = (j % 10* 100 + j % 10 * 10) + 'px';		  
+                  lists[j].style.top = (Math.floor(j/10)) * 100 + (Math.floor(j/10)) * 10 + 'px';
+                  lists[j].style.background = colors[j%len] ;	
+              }
+              onOff = false;
+            }
+        }
+        </script>
+        </body>
+</html>

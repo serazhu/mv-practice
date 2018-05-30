@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>getElementsByTagName动态合集</title>
+    
+</head>
+<body>
+    
+    <script>
+    
+    var oBtn = document.getElementsByTagName("input");
+
+    // 动态集合
+    var oTest = document.getElementById("test");
+    var len = oBtn.length;
+    document.body.innerHTML += "<input type='button' value='按钮' /><input type='button' value='按钮' />";
+    document.body.innerHTML += "<input id='test' type='button' value='测试' />";
+
+        // 动态集合
+    alert(oBtn.length);
+    alert(len);
+
+        // 动态集合可以添加事件
+    oBtn[0].onclick = function(){
+        alert(1);
+    }
+    oTest.onclick = function(){
+        alert(2);
+    }
+   
+    
+
+    </script>
+</body>
+</html>
