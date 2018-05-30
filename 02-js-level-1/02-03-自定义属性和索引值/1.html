@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{padding:0;margin:0;}
+li{
+	list-style:none;
+	}
+#box{
+	border:1px solid #000;
+	width:200px;
+	margin:0 auto;
+	}
+li span:before{
+	content:'';
+	border:5px solid transparent;
+	border-left-color:#888;
+	width:0;
+	height:0;
+	display:inline-block;
+	margin-left:10px;
+	}
+li span{
+	font-size:22px;
+	font-weight:bold;
+	background:lightblue;
+	display:block;
+	line-height:32px;
+	}
+li span.active{	
+	background:yellow;
+	}
+li span.active:before{	
+	border:5px solid transparent;
+	border-top-color:#888;
+	}
+li li{
+	padding-left:10px;	
+	line-height:26px;
+}
+li li.active{
+	background:#FC3;
+}
+ul ul{
+	display:none;
+	}
+</style>
+</head>
+
+<body>
+<ul id="box">
+	<li>
+    	<span><i></i>我的好友</span>
+        <ul>
+        	<li>张三</li>
+            <li>张三</li>
+            <li>张三</li>
+            <li>张三</li>
+            <li>张三</li>
+        </ul>
+    </li>
+    <li>
+    	<span><i></i>企业好友</span>
+        <ul>
+        	<li>李四</li>
+            <li>李四</li>
+            <li>李四</li>
+            <li>李四</li>
+        </ul>
+    </li>
+    <li>
+    	<span><i></i>黑名单</span>
+        <ul>
+        	<li>李小四</li>
+            <li>张小三</li>
+        </ul>
+    </li>
+</ul>
+<script>
+var box = document.getElementById('box');
+var mySpans = box.getElementsByTagName('span'); 
+var myUls = box.getElementsByTagName('ul');
+
+for(var i = 0, len = mySpans.length; i < len; i++){
+	mySpans[i].onOff = true;
+	mySpans[i].index = i;
+	mySpans[i].onclick = function(){
+		if(this.onOff){			
+			for(var j = 0, len = mySpans.length; j < len; j++){
+				mySpans[j].className = '';
+				myUls[j].style.display = 'none';
+				mySpans[j].onOff = true;	
+			}
+			this.className = 'active';	
+			myUls[this.index].style.display = 'block';
+			this.onOff = false;
+		}else{
+			this.onOff = true;
+			this.className = '';
+			myUls[this.index].style.display = 'none';
+		}
+	}
+}
+
+for(var i = 0, len = myUls.length; i < len; i++){
+	var lists = myUls[i].getElementsByTagName('li');
+	for(var j = 0, len = lists.length; j < len; j++ ){
+			lists[j].onOff = true;	
+			lists[j].onclick = function(){
+				if(this.onOff){
+					for(var k = 0, len = myUls.length; k < len; k++){
+						var lists = myUls[k].getElementsByTagName('li');
+						for(var m = 0, len = lists.length; m < len; m++){
+							lists[m].className = '';	
+							lists[m].onOff = true;
+						}
+					}
+					this.className = 'active';	
+					this.onOff = false;
+				}else{
+					this.className = '';	
+					this.onOff = true;
+				}		
+			}
+		}
+}
+</script>
+</body>
+</html>
