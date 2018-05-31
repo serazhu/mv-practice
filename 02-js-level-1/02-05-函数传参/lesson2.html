@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{padding:0;margin:0}
+button{
+	padding:5px 10px;
+	}
+span{
+	padding:0 10px;
+	}
+em{
+	color:#093;
+	padding-right:15px;
+	}
+i{
+	color:#F60;
+	line-height:50px;
+	}
+</style>
+</head>
+
+<body>
+<div>
+	<ul>
+    	<li><button>-</button><span>0</span><button>+</button>单价：<em>12.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>10.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>8.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>8元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>14.5元</em>小计：<i>0元</i></li>
+    </ul>
+</div>
+<script>
+var lis = document.getElementsByTagName('li');
+for(var i = 0, len = lis.length; i < len; i++){
+	compute(lis[i]);
+}
+
+function compute(cli){
+	var btn1 = cli.getElementsByTagName('button')[0];
+	var btn2 = cli.getElementsByTagName('button')[1];
+	var span = cli.getElementsByTagName('span')[0];
+	var num = Number(span.innerHTML);
+	var price = parseFloat(cli.getElementsByTagName('em')[0].innerHTML);
+	var total = cli.getElementsByTagName('i')[0];
+	btn2.onclick = function(){
+		num++;
+		span.innerHTML = num;
+		total.innerHTML = num * price + '元';
+	}
+	btn1.onclick = function(){
+		if(num > 0){
+			num--;
+			span.innerHTML = num;
+			total.innerHTML = num * price + '元';
+		}
+	}
+}
+
+
+</script>
+</html>

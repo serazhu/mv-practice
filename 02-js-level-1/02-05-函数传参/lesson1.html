@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+body{
+	background:#333;
+	}	
+#box1,#box2{
+	width:400px;
+	height:500px;
+	margin: 10px 100px;	
+	background: url(images/loader_ico.gif) no-repeat center #fff;
+	position:relative;
+	float:left;
+}
+img{
+	width:100%;
+	height:100%;
+	}
+span,p{
+	position:absolute;
+	left:0;
+	width:100%;
+	text-align:center;
+	line-height:32px;
+	color:#fff;
+	background:rgba(0,0,0,.3)
+	}
+span{
+	
+	top:0;
+	}
+p{	
+	bottom:0;
+	}
+ul{
+	position:absolute;
+	right:-50px;
+	top:0;
+	}
+ul li{
+	width:40px;
+	height:40px;
+	background:#888;
+	margin-bottom:8px;
+	list-style:none;
+	}
+ul li.active{
+	background:#FC0;
+	}
+</style>
+</head>
+
+<body>
+<div id="box1">
+	<span>图片数量正在计算中...</span>
+	<img src="" />
+    <p>图片描述正在加载中...</p>
+    <ul></ul>
+</div>
+<div id="box2">
+	<span>图片数量正在计算中...</span>
+	<img src="" />
+    <p>图片描述正在加载中...</p>
+    <ul></ul>
+</div>
+<script>
+
+var box1 = document.getElementById('box1');
+var arr1 = ['images/1.png','images/2.png','images/3.png','images/4.png'];
+var arrp1 = ['图片1','图片2','图片3','图片4'];
+var box2 = document.getElementById('box2');
+var arr2 = ['images/1.png','images/2.png','images/3.png'];
+var arrp2 = ['图片1','图片2','图片3'];
+function selectShow(box,arr,arrp){
+	var span1 = box.getElementsByTagName('span')[0];
+	var p1 = box.getElementsByTagName('p')[0];
+	var img1 = box.getElementsByTagName('img')[0];
+	var uls1 = box.getElementsByTagName('ul')[0];
+	var lis1 = box.getElementsByTagName('li');
+	var len1 = arr.length;
+	var num = 0;
+	
+	for(var i = 0; i < len1; i++){
+		uls1.innerHTML += '<li></li>';
+	}
+	tab(num);
+	
+	for(var i = 0; i < len1; i++ ){
+		lis1[i].index = i;	
+		lis1[i].onclick = function(){
+			lis1[num].className = '';
+			num = this.index;
+			tab(num);
+		}
+	}
+	
+	function tab(num){
+		img1.src = arr[num];
+		lis1[num].className = 'active';
+		span1.innerHTML = num + 1 + '/' + len1 ;
+		p1.innerHTML = arrp[num];	
+	}
+	
+}
+selectShow(box1,arr1,arrp1);
+selectShow(box2,arr2,arrp2);
+
+
+//var arr2 = ['images/1.png','images/2.png','images/3.png'];
+//var arrp2 = ['图片1','图片2','图片3'];
+//var box2 = document.getElementById('box2');
+//var span2 = box2.getElementsByTagName('span')[0];
+//var p2 = box2.getElementsByTagName('p')[0];
+//var img2 = box2.getElementsByTagName('img')[0];
+//var uls2 = box2.getElementsByTagName('ul')[0];
+//var lis2 = box2.getElementsByTagName('li');
+//var len2 = arr2.length;
+//var num2 = 0;
+//
+//for(var i = 0; i < len2; i++){
+//	uls2.innerHTML += '<li></li>';
+//}
+//tab2(num2);
+//
+//for(var i = 0; i < len2; i++ ){
+//	lis2[i].index = i;	
+//	lis2[i].onclick = function(){
+//		lis2[num2].className = '';
+//		num2 = this.index;
+//		tab2(num2);
+//	}
+//}
+//
+//function tab2(num2){
+//	img2.src = arr2[num2];
+//	lis2[num2].className = 'active';
+//	span2.innerHTML = num2 + 1 + '/' + len2 ;
+//	p2.innerHTML = arrp2[num2];	
+//}
+</script>
+</body>
+</html>

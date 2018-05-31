@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{padding:0;margin:0}
+button{
+	padding:5px 10px;
+	}
+span{
+	padding:0 10px;
+	}
+em{
+	color:#093;
+	padding-right:15px;
+	}
+i{
+	color:#F60;
+	line-height:50px;
+	}
+</style>
+</head>
+
+<body>
+<div>
+	<ul>
+    	<li><button>-</button><span>0</span><button>+</button>单价：<em>12.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>10.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>8.5元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>8元</em>小计：<i>0元</i></li>
+        <li><button>-</button><span>0</span><button>+</button>单价：<em>14.5元</em>小计：<i>0元</i></li>
+    </ul>
+    <p>商品合计共:<i id="goodscount">0件</i>，共花费了:<i id="goodsprice">0元</i></p>
+    <p>其中最贵的商品单价是:<i id="pricemax"></i></p>
+</div>
+<script>
+var lis = document.getElementsByTagName('li');
+for(var i = 0, len = lis.length; i < len; i++){
+	compute(lis[i]);
+}
+
+function compute(cli){	
+	var btn1 = cli.getElementsByTagName('button')[0];
+	var btn2 = cli.getElementsByTagName('button')[1];
+	var span = cli.getElementsByTagName('span')[0];
+	var num = Number(span.innerHTML);
+	var price = parseFloat(cli.getElementsByTagName('em')[0].innerHTML);
+	var total = cli.getElementsByTagName('i')[0];
+	var ems = document.getElementsByTagName('em')
+	btn2.onclick = function(){		
+		num++;
+		domchange();
+	}
+	btn1.onclick = function(){
+		if(num > 0){
+			num--;
+			domchange()
+		}
+	}
+	function domchange(){
+
+		// 总数量
+		var count = 0;
+
+		// 总数量
+		var totalPrice = 0;
+
+		// 存放每个总价的数组
+		var arr = [];
+
+		// 将数量和每个商品总价格填入页面		
+		span.innerHTML = num;
+		total.innerHTML = num * price + '元';
+
+		var goodscount = document.getElementById('goodscount');
+		var goodsprice = document.getElementById('goodsprice');	
+		var pricemax = document.getElementById('pricemax');
+		
+		for(var i = 0, len = lis.length; i < len; i++){
+			var thisli = lis[i].getElementsByTagName('span')[0].innerHTML;
+			var thisi = lis[i].getElementsByTagName('i')[0].innerHTML;			
+			count += Number(thisli);
+			arr[i] = parseFloat(thisi);
+			arr[i].index = i;
+			totalPrice += parseFloat(thisi);
+			var newarr = arr.concat().sort(function(a,b){return b -a});			
+		}
+		var index = arr.indexOf(newarr[0]);
+		pricemax.innerHTML = ems[index].innerHTML;
+		goodscount.innerHTML = count + '件';
+		goodsprice.innerHTML = totalPrice + '元';	
+	}
+}
+</script>
+</body>
+</html>

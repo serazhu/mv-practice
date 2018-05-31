@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        .clearfix{
+            *zoom:1;
+            clear:both;
+            }
+        .clearfix:after,.clearfix:before{
+            content:'';
+            clear:both;
+            display:table;
+            overflow:hidden;
+            }
+        ul{
+            background:#FCC;
+            width:400px;
+            padding:8px;
+            }
+        li{
+            list-style:none;
+            border-bottom:1px dotted #fff;
+            padding:5px;
+            }
+        li.active{
+            background:#fff;
+            }
+        li.active p{
+            display:none;
+            }
+        li.active div div{
+            display:block;
+            }
+        li i{
+            float:left;
+            width:20px;
+            height:20px;
+            background:#333;
+            color:#fff;
+            border-radius:5px;
+            text-align:center;
+            line-height:20px;
+            margin-right:10px;
+            font-style:normal;
+            }
+        li div{
+            float:left;
+            position:relative;
+            }
+        li div div{	
+            display:none;
+            }
+        li div img{
+            width:200px;
+            height:100px;
+            border:1px solid #ccc;
+            float:left;
+            }
+        li div span{	
+            float:left;
+            font-size:12px;
+            width:140px;
+            margin-left:10px;
+            }
+        li div button{	
+            position:absolute;
+            right:10px;
+            bottom:10px;
+            }
+        </style>
+        </head>
+        
+        <body>
+        <div>
+            <ul>
+                <li class="clearfix">
+                    <i>1</i>
+                    <div>
+                        <p>第一条第一条第一条第一条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第一条描述第一条描述第一条描述第一条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>2</i>
+                    <div>
+                        <p>第二条第二条第二条第二条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第二条描述第二条描述第二条描述第二条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>3</i>
+                    <div>
+                        <p>第三条第三条第三条第三条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第三条描述第三条描述第三条描述第三条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>4</i>
+                    <div>
+                        <p>第四条第四条第四条第四条第四条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第四条描述第四条描述第四条描述第四条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>5</i>
+                    <div>
+                        <p>第五条第五条第五条第五条第五条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第五条描述第五条描述第五条描述第五条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li><li class="clearfix">
+                    <i>6</i>
+                    <div>
+                        <p>第六条第六条第六条第六条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第六条描述第六条描述第六条描述第六条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>7</i>
+                    <div>
+                        <p>第七条第七条第七条第七条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第七条描述第七条描述第七条描述第七条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>8</i>
+                    <div>
+                        <p>第八条第八条第八条第八条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第八条描述第八条描述第八条描述第八条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>9</i>
+                    <div>
+                        <p>第九条第九条第九条第九条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第九条描述第九条描述第九条描述第九条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <i>10</i>
+                    <div>
+                        <p>第十条第十条第十条</p>
+                        <div>
+                            <img src="images/1.jpg" />
+                            <span>第十条描述第十条描述第十条描述第十条描述</span>
+                            <button>播放</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <script>
+            var lis = document.getElementsByTagName('li');
+            for(var i = 0, len = lis.length; i < len; i++ ){
+                lis[i].index = i;	
+                tab(lis[i]);
+            }
+            var index = 0;
+            function tab(cli){
+                cli.onmouseover = function(){			
+                    if(this.className.indexOf('active') < 0){
+                        lis[index].className = 'clearfix';
+                        this.className += ' active';
+                        index = this.index;
+                    }	
+                }	
+            }
+            </script>
+        </div>
+        </body>
+        </html>

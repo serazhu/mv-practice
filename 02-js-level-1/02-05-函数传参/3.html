@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            }
+        .wrapper{
+            width:400px;
+            }
+        li{
+            list-style:none;
+            border-bottom:1px dotted #ccc;
+            line-height:32px;
+            padding-left:20px;
+            }
+        li a,li i{
+            padding-left:20px;
+            font-style:normal;
+            }
+        h2{
+            background:#0C3;
+            padding:5px 10px;
+            line-height:32px;
+            font-size:18px;
+            color:#fff;
+            border-radius:5px;
+            }
+        </style>
+        </head>
+        
+        <body>
+        <div class="wrapper">
+            <h2>分类名称</h2>
+            <ul>
+                <li>
+                    <span>可修改的文本</span><a href="#">编辑</a>
+                </li>
+                <li>
+                    <span>可修改的文本</span><a href="#">编辑</a>
+                </li>
+                <li>
+                    <span>可修改的文本</span><a href="#">编辑</a>
+                </li>
+            </ul>
+        </div>
+        <script>
+        var lis = document.getElementsByTagName('li');
+        for(var i = 0, len = lis.length; i < len; i++){
+            tab(lis[i]);	
+        }
+        
+        function tab(cli){
+            var edit = cli.getElementsByTagName('a')[0];
+            var text = cli.getElementsByTagName('span')[0].innerHTML;
+            edit.onclick = function(){
+                cli.innerHTML = '<input type="text" value="' + text + '" /><i>保存</i><i>取消</i>';
+                var save = cli.getElementsByTagName('i')[0];
+                var cancel = cli.getElementsByTagName('i')[1];
+                save.onclick = function(){
+                    var value = cli.getElementsByTagName('input')[0].value;	
+                    cli.innerHTML = '<span>'+ value + '</span><a href="#">编辑</a>';
+                    tab(cli)
+                }
+                cancel.onclick = function(){
+                    var value = cli.getElementsByTagName('input')[0].value;	
+                    cli.innerHTML = '<span>'+ value + '</span><a href="#">编辑</a>';
+                    tab(cli)
+                }
+                return false;	
+            }
+        }
+        </script>
+        </body>
+        </html>
+        

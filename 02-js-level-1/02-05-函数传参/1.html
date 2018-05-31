@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            }
+        button{
+            padding:5px 10px;	
+            margin:0 10px;
+        }
+        span{
+            padding:0 5px;
+            }
+        li{
+            line-height:40px;
+            }
+        em{
+            padding:0 15px 0 5px;
+            color:#060;
+            }
+        i{
+            padding:0 5px;
+            color:#F60;
+            }
+        div{
+            line-height:40px;
+            }	
+        </style>
+        </head>
+        
+        <body>
+        <div>
+            <ul>
+                <li><button>-</button><span>0</span><button>+</button>单价:<em>12.5元</em>小计:<i>0元</i></li>
+                <li><button>-</button><span>0</span><button>+</button>单价:<em>10.5元</em>小计:<i>0元</i></li>
+                <li><button>-</button><span>0</span><button>+</button>单价:<em>8.5元</em>小计:<i>0元</i></li>
+                <li><button>-</button><span>0</span><button>+</button>单价:<em>8元</em>小计:<i>0元</i></li>
+                <li><button>-</button><span>0</span><button>+</button>单价:<em>14.5元</em>小计:<i>0元</i></li>
+            </ul>
+            <div>商品合计共:<i id="goodscount">0件</i>，共花费了:<i id="goodsprice">0元</i></div>
+            <div>其中最贵的商品单价是:<i id="pricemax"></i></div>
+        </div>
+        <script>
+        var lists = document.getElementsByTagName('li'),
+        goodsCount = document.getElementById('goodscount'),
+        goodsprice = document.getElementById('goodsprice'),
+          pricemax = document.getElementById('pricemax'),
+          ems = document.getElementsByTagName('em'),
+               len = lists.length,
+        totalCount = 0,
+        totalPrice = ['','','','',''],
+          numPrice = 0;
+        
+        for(var i = 0; i < len; i++){
+            lists[i].index = i;
+            fn(lists[i])
+        }
+        function fn(currentLi){
+             var decrease = currentLi.getElementsByTagName('button')[0];
+              var increase = currentLi.getElementsByTagName('button')[1];
+              var count = currentLi.getElementsByTagName('span')[0].innerHTML;
+              var price = currentLi.getElementsByTagName('em')[0].innerHTML;
+              var total = currentLi.getElementsByTagName('i')[0];
+        
+            increase.onclick = function(){
+                count++;
+                currentLi.getElementsByTagName('span')[0].innerHTML = count;	
+                total.innerHTML = parseFloat(price) * count + '元';
+                totalCount++;
+                goodsCount.innerHTML = totalCount + '件';
+                totalPrice[currentLi.index] = parseFloat(price) * count;
+                getTotalPrice();
+            }
+            
+            decrease.onclick = function(){
+                if(count > 0){
+                  count--;
+                  currentLi.getElementsByTagName('span')[0].innerHTML = count;	
+                  total.innerHTML = parseFloat(price) * count + '元';
+                  totalCount--;
+                  goodsCount.innerHTML = totalCount + '件';
+                  totalPrice[currentLi.index] = parseFloat(price) * count;
+                  getTotalPrice();
+                }else{
+                    return false;	
+                }
+            }
+        }
+        function getTotalPrice(){
+            numPrice = 0;
+            for(var i = 0, len = totalPrice.length; i < len; i++){
+                if(totalPrice[i]){
+                    numPrice += parseFloat(totalPrice[i]);	
+                }
+            }
+            var newarr = totalPrice.concat();
+            newarr.sort(function(a,b){return b - a})
+            var max = newarr[0];
+            var index = totalPrice.indexOf(max);	
+            goodsprice.innerHTML = numPrice + '元';
+            pricemax.innerHTML = ems[index].innerHTML;
+        }
+        </script>
+        </body>
+        </html>

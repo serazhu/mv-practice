@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        .wrapper{
+            width:800px;	
+        }
+        #box{
+            position:relative;	
+        }
+        
+        li{list-style:none;}
+        li.active .title{
+            background:#f1f1f1;
+            }
+        .title{
+            width:160px;
+            background:#ccc;
+            height:80px;
+            text-align:center;
+            line-height:80px;	
+        }
+        li .subbox{
+            position:absolute;
+            left:170px;
+            top:0;
+            height:320px;
+            width:630px;
+            background:pink;
+            display:none;
+            }
+        li.active .subbox{
+            display:block;
+            }
+            
+        .subbox img{
+            height:320px;
+            width:630px;
+            display:none;
+            }
+        .subbox li.active img{
+            display:block;
+            }
+        .subbox li.active .subtitle{
+            background:rgba(255,0,0,.5);
+            }
+        .subbox .subtitle{
+            position:absolute;
+            bottom:0;
+            width:155px;
+            color:#fff;
+            background:rgba(0,0,0,.5);
+            line-height:36px;
+            text-align:center;
+            }
+        .subbox li:nth-child(1) .subtitle{
+            left:0;
+            }
+        .subbox li:nth-child(2) .subtitle{
+            left:157px;
+            }
+        .subbox li:nth-child(3) .subtitle{
+            left:314px;
+            }
+        .subbox li:nth-child(4) .subtitle{
+            left:471px;
+            }
+        </style>
+        
+        </head>
+        
+        <body>
+        <div class="wrapper">
+            <ul id="box">
+                <li class="active">
+                    <div class="title">最热团购</div>
+                    <div class="subbox">
+                        <ul>
+                            <li class="active">
+                                <div class="subtitle">最热团购1</div>
+                                <img src="images/1.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">最热团购2</div>
+                                <img src="images/2.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">最热团购3</div>
+                                <img src="images/3.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">最热团购4</div>
+                                <img src="images/4.png" />
+                            </li>
+                        </ul>
+                    </div>            
+                </li>
+                <li>
+                    <div class="title">商城特惠</div>
+                    <div class="subbox">
+                        <ul>
+                            <li>
+                                <div class="subtitle">商城特惠1</div>
+                                <img src="images/1.png" />                       
+                            </li>
+                            <li>
+                                <div class="subtitle">商城特惠2</div>
+                                <img src="images/2.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">商城特惠3</div>
+                                <img src="images/3.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">商城特惠4</div>
+                                <img src="images/4.png" />
+                            </li>
+                        </ul>
+                    </div>            
+                </li>
+                <li>
+                    <div class="title">名品推荐</div>
+                    <div class="subbox">
+                        <ul>
+                            <li>
+                                <div class="subtitle">名品推荐1</div>
+                                <img src="images/1.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">名品推荐2</div>
+                                <img src="images/2.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">名品推荐3</div>
+                                <img src="images/3.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">名品推荐4</div>
+                                <img src="images/4.png" />
+                            </li>
+                        </ul>
+                    </div>            
+                </li>
+                <li>
+                    <div class="title">缤纷活动</div>
+                    <div class="subbox">
+                        <ul>
+                            <li>
+                                <div class="subtitle">缤纷活动1</div>
+                                <img src="images/1.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">缤纷活动2</div>
+                                <img src="images/2.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">缤纷活动3</div>
+                                <img src="images/3.png" />
+                            </li>
+                            <li>
+                                <div class="subtitle">缤纷活动4</div>
+                                <img src="images/4.png" />
+                            </li>
+                        </ul>
+                    </div>            
+                </li>
+            </ul>
+        
+        </div>
+        <script>
+        var box = document.getElementById('box');
+        var lis = box.children;
+        var current = 0;
+        for(var i = 0, len = lis.length; i < len; i++){
+            tab(lis[i]);
+            lis[i].index = i;            	
+        }
+        
+        
+        function tab(cli){
+            var title = cli.getElementsByClassName('title')[0];	
+            var subbox = cli.getElementsByClassName('subbox')[0];	
+            title.onclick = function(){
+                lis[current].className = '';
+                cli.className = 'active';
+                current = cli.index;
+                cli.getElementsByTagName('li')[0].getElementsByTagName('div')[0].click();                
+            }
+            var sublis = cli.getElementsByTagName('li');
+            for(var i = 0, len =  sublis.length; i < len; i++){
+                var subcurrent = 0;
+                sublis[i].index = i;
+                subTab(sublis[i]);	
+            }
+            function subTab(subli){
+                
+                var subtitle = subli.getElementsByTagName('div')[0];
+                var subimg = subli.getElementsByTagName('img')[0];
+                subtitle.onclick = function(){
+                    console.log(sublis,subcurrent);
+                    sublis[subcurrent].className = '';
+                    subli.className = 'active';	
+                    subcurrent = subli.index;
+                }
+            }
+        }
+        
+        
+        </script>
+        </body>
+        </html>
+        
