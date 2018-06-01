@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+*{
+	padding:0;
+	margin:0;
+	}
+li{
+	list-style:none;
+	float:left;
+	margin:0 5px;
+	}
+span,p{
+	float:left;
+	}
+</style>
+</head>
+
+<body>
+<div>
+	<span>总体评分：</span>
+	<ul>
+    	<li><img src="images/star_d.png" /></li>
+        <li><img src="images/star_d.png" /></li>
+        <li><img src="images/star_d.png" /></li>
+        <li><img src="images/star_d.png" /></li>
+        <li><img src="images/star_d.png" /></li>
+    </ul>
+    <p></p>
+</div>
+<script>
+var text = ['差','一般','不错','力荐','太牛了'];
+var imgs = document.getElementsByTagName('img');
+var len = imgs.length;
+var myp = document.getElementsByTagName('p')[0];
+for(var i = 0; i < len; i++){
+	imgs[i].index = i;
+	var current = 0;
+	
+	imgs[i].onmouseover = function(){
+		var num = this.index;
+		
+		myp.innerHTML = text[num];
+		for(var i = 0; i < len; i++){
+			imgs[i].src = 'images/star_d.png';
+		}
+		if(num < 2){
+			for(var j = 0; j <= num; j++){
+				imgs[j].src = 'images/star_g.png';
+			}	
+		}else{
+			for(var j = 0; j <= num; j++){
+				imgs[j].src = 'images/star_y.png';
+			}
+		}
+	}
+	
+	imgs[i].onmouseout = function(){
+		var num = this.index;			
+		if(!current){
+			for(var i = 0; i < len; i++){
+				imgs[i].src = 'images/star_d.png';
+				myp.innerHTML = '';		
+			}
+		}else{
+			 imgs[current - 1].onclick();	
+		}
+	}
+	
+	imgs[i].onclick = function(){
+		current = this.index + 1;
+		for(var i = 0; i < len; i++){
+			imgs[i].src = 'images/star_d.png';	
+		}
+		if(current > 2){
+			for(var i = 0; i < current; i++){
+			  imgs[i].src = 'images/star_y.png';	
+		  	}	
+		}else{
+			for(var j = 0; j < current; j++){
+			  imgs[j].src = 'images/star_g.png';	
+		  	}
+		}
+			
+	}
+}
+</script>
+</body>
+</html>

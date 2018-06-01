@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{padding:0;margin:0;}
+li{
+	margin-top:5px;
+	}
+</style>
+</head>
+
+<body>
+<ul>
+	<li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+    <li></li>
+	<li></li>
+</ul>
+<script>
+var colors = ['red','yellow','green','blue'];
+var lis = document.getElementsByTagName('li');
+var colorlen = colors.length;
+for(var i = 0, len = lis.length; i < len; i++){	
+	lis[i].index = i;	
+	lis[i].style.background = colors[i%colorlen];
+	var oldbg;
+	lis[i].onmouseover = function(){		
+		this.style.background = 'gray';	
+	}
+	lis[i].onmouseout = function(){
+		
+		// 获取当前的索引，重新计算背景样式		
+		this.style.background = colors[this.index%colorlen];	
+	}	
+}
+/*
+ * 保存原始的方式
+ */
+// var colors = ['red','yellow','green','blue'];
+// var lis = document.getElementsByTagName('li');
+// var colorlen = colors.length;
+// for(var i = 0, len = lis.length; i < len; i++){	
+// 	lis[i].style.background = colors[i%colorlen];
+	
+// 	// 保存原始的背景样式
+// 	var oldbg;
+// 	lis[i].onmouseover = function(){
+// 		oldbg = this.style.background;
+// 		this.style.background = 'gray';	
+// 	}
+// 	lis[i].onmouseout = function(){		
+// 		this.style.background = oldbg;	
+// 	}	
+// }
+</script>
+</body>
+</html>
+

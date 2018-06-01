@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+li{
+	line-height:36px;
+	list-style:none;
+	border-bottom:1px solid #fff;
+	}
+li .active{
+	background:#ccc;
+	}
+span{
+	display:inline-block;
+	width:200px;
+	padding-left:10px;
+	}
+input{
+	margin-left:10px;
+	}	
+.wrapper{
+	width:500px;
+	margin:0 auto;
+	}
+.wrapper div{
+	line-height:36px;
+	background:#888;
+	}
+	
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<ul>
+    	<li><label><input type="checkbox" /></label><span>私奔</span><span>梁博</span></li>
+        <li><label><input type="checkbox" /></label><span>北京北京</span><span>梁博，黄勇</span></li>
+        <li><label><input type="checkbox" /></label><span>我爱你中国</span><span>梁博</span></li>
+        <li><label><input type="checkbox" /></label><span>花火</span><span>梁博</span></li>
+        <li><label><input type="checkbox" /></label><span>回来</span><span>梁博</span></li>
+        <li><label><input type="checkbox" /></label><span>爱要有你才精彩</span><span>梁博</span></li>
+    </ul>
+	<div><label><input id="all" type="checkbox" /></label><span>全选</span></div>
+</div>
+<script>
+var lis = document.getElementsByTagName('li');
+var len = lis.length;
+var colors = ['#CFF','#FFF'];
+var colorlen = colors.length;
+var allinput = document.getElementById('all');
+for(var i = 0; i < len; i++){
+	lis[i].index = i;
+	lis[i].style.background = colors[i%colorlen];
+	var input= lis[i].getElementsByTagName('input')[0];	
+	input.index = i;
+	var num = 0;
+	// 初始化，设置背景
+	checked(input);
+	
+	// 鼠标移入事件,未选中时,背景色为移入色
+	lis[i].onmouseover = function(){
+		var thisinput = this.getElementsByTagName('input')[0];
+		if(!thisinput.checked){
+			this.style.background = '#eee';	
+		}
+	}
+	
+	// 鼠标移出事件,未选中时,背景为初始色
+	lis[i].onmouseout = function(){
+		var thisinput = this.getElementsByTagName('input')[0];
+		if(!thisinput.checked){
+			this.style.background = colors[this.index%colorlen];
+		}			
+	}
+	
+	// 点击事件,选中时背景改变
+	lis[i].onclick = function(){		
+		var thisinput = lis[this.index].getElementsByTagName('input')[0];
+		thisinput.index = this.index;	
+		checked(thisinput)
+	}
+	
+	
+	// 判断单条信息是否选中，来设置背景色,计算选中的条数来控制全选
+	function checked(thisli){				
+		if(thisli.checked){
+			lis[thisli.index].style.background = '#aaa';					
+		}else{
+			lis[thisli.index].style.background = colors[thisli.index%colorlen];	
+		}
+		var num = 0;
+		for(var i = 0; i < len; i++){
+			var input= lis[i].getElementsByTagName('input')[0];	
+			if(input.checked){
+				num++;
+				if(num === len){										
+					allinput.checked = true;
+				}else{
+					allinput.checked = false;
+				}	
+			}	
+		}
+	}	
+}
+
+// 全选按钮，全选部分
+allinput.onclick = function(){
+	var onOff = this.checked;
+	if(onOff){
+		for(var i = 0; i < len; i++){
+			var input= lis[i].getElementsByTagName('input')[0];	
+			input.checked = true;
+			lis[i].click()	
+		}
+		onOff = !onOff;				
+	}else{
+		for(var i = 0; i < len; i++){
+			var input= lis[i].getElementsByTagName('input')[0];	
+			input.checked = false;
+			lis[i].click()	
+		}
+		onOff = !onOff;		
+	}
+		
+}
+</script>
+</body>
+</html>
