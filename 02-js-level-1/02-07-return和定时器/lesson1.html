@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #div{
+        background: red;
+        width: 300px;
+        height:300px;
+    }
+    </style>
+</head>
+<body>
+    <div id="div" style="width:200px;">123</div>
+    <button id="btn">按钮</button>
+    <button id="btn1">获取样式</button>
+
+    <script>
+        function getId(id){
+            return document.getElementById(id);
+        }        
+        alert(getId('div').innerHTML);
+
+        function $(id){
+            return document.getElementById(id);        
+        }
+
+        $('btn').onclick = function(){
+            this.style.background = 'yellow';
+        }
+        console.log(div)
+        console.log(getId('div'))
+
+        $('div').style.cssText = 'width:300px;';
+        $('btn1').onclick = function(){
+            console.log(this)
+            alert('style.cssText: ' + $('div').style.cssText);
+            alert('现代浏览器-getComputedStyle方法: ' + getComputedStyle($('div')).height );
+            alert('style.height: ' + $('div').style.height ); 
+            // ie浏览器
+            alert('ie浏览器-currentStyle: ' + $('div').currentStyle.width);
+        }
+
+    </script>
+</body>
+</html>

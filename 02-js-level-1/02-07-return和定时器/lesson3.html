@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background: url(images/sina.jpg) no-repeat top center;
+    }
+    div{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform:translate(-50%,-50%);
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <img src="images/miaov.jpg" alt="">
+    </div>
+    <script>
+    var timer = setTimeout(alertImg, 2000);
+    function alertImg(){
+        $('box').style.display = 'block';
+        timer = setTimeout(hideImg, 3000);
+    }
+    function  hideImg(){
+        $('box').style.display = 'none';
+    }       
+
+    // js库
+    function $(arg){
+        if(typeof arg === 'function'){
+            return window.onload = v;
+        }else if(typeof arg === 'string'){
+            return document.getElementById(arg);
+        }else if(typeof arg === 'object'){
+            return arg
+        }        
+    }
+
+    function getStyle(obj, arr){
+       return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr];
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #leftbox{
+        width: 300px;
+        height: 500px;
+        background: pink;
+        float: left;
+    }
+    #rightbox{
+        float: left;
+        width: 200px;
+        height: 100px;
+        background: goldenrod;
+        margin-left: 10px;
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="leftbox"></div>
+    <div id="rightbox"></div>
+    <script>
+        var timer = null;
+        var leftbox = $('leftbox');
+        var rightbox = $('rightbox');
+        leftbox.onmouseover = show;
+        leftbox.onmouseout = hide;
+        rightbox.onmouseover = show;
+        rightbox.onmouseout = hide;
+        function show(){
+            clearTimeout(timer);
+            rightbox.style.display = 'block';            
+        }
+        function hide(){
+            timer = setTimeout(function(){
+                rightbox.style.display = 'none';
+            },1000)            
+        }
+        // js库
+        function $(arg){
+        if(typeof arg === 'function'){
+            return window.onload = arg;
+        } else if(typeof arg === 'string'){
+            return document.getElementById(arg);
+        } else if(typeof arg === 'obj'){
+            return obj;
+        }
+    }
+    </script>
+</body>
+</html>

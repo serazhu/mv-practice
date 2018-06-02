@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    function producetarr1(n){
+        var arr = [];
+        for(var i = 0; i < n; i++){
+            arr.push(i)
+        }
+        return arr;
+    }
+    console.log(producetarr1(5));
+
+    function producetarr2(m,n){
+        var arr = [];
+        if(m <= n){
+            for(var i = m; m <= n; m++){
+                arr.push(m);
+            }
+        }else{
+            for(var i = n; n <= m; n++){
+                arr.push(n);
+            }
+        }
+        return arr;
+    }
+
+    console.log(producetarr2(2,5));
+    console.log(producetarr2(6,2));
+    console.log(producetarr2(3,3));
+
+
+
+    </script>
+</body>
+</html>

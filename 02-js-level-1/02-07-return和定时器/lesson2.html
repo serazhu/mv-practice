@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background: url(images/1.jpg);
+    }
+    </style>
+</head>
+<body>
+    <button id="btn1">换背景</button id="btn2"><button>停</button>
+    <script>
+    var timer = setInterval(fn,1000);
+    var i = 0;
+    function fn(){
+        document.title = i++;
+        if(i === 10){
+            clearInterval(timer);
+        }
+    }
+    fn();
+
+
+    // 换背景
+    var arr = ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg'];
+    var len = arr.length;
+    var j = 0;
+    var timer = null;
+    $('btn1').onclick = function(){
+        clearInterval(timer);        
+        timer = setInterval(changeImg, 1000);
+        function changeImg(){            
+            j++;  
+            document.body.style.background = 'url(' + arr[j%len] + ')';            
+        }
+    }
+    $('btn2').onclick = function(){
+        clearInterval(timer);
+    }
+
+
+
+    // js库
+    function $(id){
+        return document.getElementById(id);
+    }
+    </script>
+</body>
+</html>

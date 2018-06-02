@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        background: #333;
+    }
+    #wrapper{
+        width: 400px;
+        height: 500px;
+        background: url(images/loader_ico.gif) no-repeat center #fff;
+        margin: 0 auto;
+        position: relative;
+    }
+    ul{
+        position: absolute;
+        right:-50px;
+        top: 0;
+    }
+    ul li{
+        width: 40px;
+        height: 40px;
+        background: #888;
+        margin-bottom: 5px;
+        list-style: none;
+    }
+    ul li.active{
+        background: yellowgreen;
+        margin-bottom: 5px;
+    }
+    span,p{
+        position:absolute;
+        left: 0;
+        width: 100%;
+        line-height: 36px;
+        background: rgba(0,0,0,.3);
+        color: #fff;
+        text-align: center;
+    }
+    span{
+        top: 0;
+    }
+    p{
+        bottom: 0;
+    }
+    img{
+        width:100%;
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <span>图片数量正在计算中...</span>
+        <img src="" alt="">
+        <ul></ul>
+        <p>图片描述正在加载中...</p>
+    </div>
+    <script>
+    var arrImg = ['images/1.png','images/2.png','images/3.png','images/4.png'];
+    var arrText = ['图片描述1','图片描述2','图片描述3','图片描述4'];
+    var lis = document.getElementsByTagName('li');
+    var img = document.getElementsByTagName('img')[0];
+    var span = document.getElementsByTagName('span')[0];
+    var text = document.getElementsByTagName('p')[0];
+    var len = arrImg.length;
+    var str = '';
+    var num = 0;
+    var pre = 0;
+    for(var i = 0; i < len; i++){
+        str += '<li></li>'
+    }
+    
+    $('wrapper').getElementsByTagName('ul')[0].innerHTML = str;
+    // 初始化
+    changeImg();
+    for(var i = 0; i < len; i++){
+        lis[i].index = i;
+        lis[i].onclick = function(){
+            num = this.index;
+            changeImg();
+        }
+    }
+    
+    function changeImg(){
+        img.src = arrImg[num];
+        span.innerHTML = num + 1 + '/' + len;
+        text.innerHTML = arrText[num];
+        lis[pre].className = '';
+        lis[num].className = 'active';
+        pre = num;
+    }
+   
+   // 自动切换
+   var timer = setInterval(autoChange,2000);
+   function autoChange(){        
+       num++;
+       num = num % len;
+       changeImg();
+   }
+   $('wrapper').onmouseover = function(){
+       clearInterval(timer);
+   } 
+   $('wrapper').onmouseout = function(){
+       clearInterval(timer);
+       timer = setInterval(autoChange,2000);
+   } 
+
+
+    // js库
+    function $(arg){
+        if(typeof arg === 'function'){
+            return window.onload = arg;
+        } else if(typeof arg === 'string'){
+            return document.getElementById(arg);
+        } else if(typeof arg === 'obj'){
+            return obj;
+        }
+    }
+    
+    </script>
+</body>
+</html>
