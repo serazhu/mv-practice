@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+    li{
+        list-style: none;
+    }
+    .clearfix{
+        clear:both;
+        *zoom:1;
+    }
+    .clearfix:after, .clearfix:before{
+        content: '';
+        display: table;
+        overflow: hidden;
+        clear: both;
+    }
+    .wapper{
+        width: 400px;
+        position: relative;
+        margin: 0 auto;
+    }
+    ul.title{
+        border:1px solid #ccc;
+        background: #eee;
+        line-height: 36px;
+    }
+    ul.title li{
+        float: left;
+        list-style: none;
+        width: 25%;
+        text-align: center;
+    }
+    ul.title li.active{
+        background: #aaa;
+    }
+    .subtitle ul li{
+        float: left;
+        font-size:12px;
+        padding:0 20px;        
+    }
+    .subtitle ul{
+        display: none;
+        border: 1px solid #aaa;
+        background: #ccc;
+        position: absolute;
+        line-height: 24px;
+        bottom:-30px;
+    }
+    .subtitle ul:after{
+        content:'';
+        border: 5px solid transparent;
+        border-bottom-color:#aaa; 
+        position: absolute;  
+        top:-10px;      
+    }
+    .subtitle li:nth-child(1) ul:after{
+        left: 50px;
+        
+    }
+    .subtitle li:nth-child(2) ul:after{
+        left: 130px;
+    }
+    .subtitle li:nth-child(3) ul:after{
+        left: 190px;
+    }
+    .subtitle li:nth-child(4) ul:after{
+        left: 250px;
+    }
+    .subtitle li:nth-child(1) ul{
+        left:0;
+    }
+    .subtitle li:nth-child(2) ul{
+        left:10px;
+    }
+    .subtitle li:nth-child(3) ul{
+        left:60px;
+    }
+    .subtitle li:nth-child(4) ul{
+        left:100px;
+    }
+    .subtitle ul a:hover{
+        text-decoration: underline;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="wapper">
+        <ul class="title clearfix">
+            <li><a href="">首页</a></li>
+            <li><a href="">关于我们</a></li>
+            <li><a href="">作品</a></li>
+            <li><a href="">博客</a></li>
+        </ul>
+        <ul class="subtitle">
+            <li>
+                <ul class="clearfix">
+                    <li><a href="">最近活动</a></li>
+                    <li><a href="">活动</a></li>
+                    <li><a href="">试听</a></li>
+                    <li><a href="">学院反馈</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="clearfix">
+                    <li><a href="">讲师</a></li>
+                    <li><a href="">联系我们</a></li>
+                    <li><a href="">培训方式</a></li>
+                    <li><a href="">培训理念</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="clearfix">
+                    <li><a href="">作品1</a></li>
+                    <li><a href="">作品2</a></li>
+                    <li><a href="">作品3</a></li>
+                    <li><a href="">作品4</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="clearfix">
+                    <li><a href="">博客1</a></li>
+                    <li><a href="">博客2</a></li>
+                    <li><a href="">博客3</a></li>
+                    <li><a href="">博客4</a></li>
+                </ul>
+            </li>
+        </ul>       
+    </div>
+    <script>
+    var titleul = document.getElementsByTagName('ul')[0];
+    var lis = titleul.getElementsByTagName('li');
+    var len = lis.length;
+
+    var subtitleul = document.getElementsByTagName('ul')[1];
+    var uls = subtitleul.getElementsByTagName('ul');
+    var timer = null;
+
+    for(var i = 0; i < len; i++){
+        lis[i].index = i;
+        uls[i].index = i;
+        lis[i].onmouseover = show; 
+        lis[i].onmouseout = hide;
+        uls[i].onmouseover = show;
+        uls[i].onmouseout = hide;
+    }
+    function show(){
+        clearInterval(timer);
+        for(var i = 0; i < len; i++){
+            uls[i].style.display = 'none';
+            lis[i].className = '';
+        }
+        uls[this.index].style.display = 'block'; 
+        lis[this.index].className = 'active';
+    }
+    function hide(){
+        var that = this;
+        clearInterval(timer);           
+        timer = setTimeout(function(){
+            uls[that.index].style.display = 'none';
+            lis[that.index].className = '';
+        },1000) 
+    }
+    </script>
+</body>
+</html>

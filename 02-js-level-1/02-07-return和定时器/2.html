@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    h2{
+        font-size: 14px;
+        text-align: center;
+        background: #333;
+        line-height: 30px;
+        color: #fff;
+    }
+    .ulbox{
+        height: 400px;
+        overflow: hidden;        
+    }
+    ul{
+        padding:5px;  
+        position: relative;              
+    }
+    li{
+        list-style: none;
+        border-bottom: 1px solid #ccc;
+        padding: 5px 0;
+    }
+    li:last-child{
+        border-bottom: none;
+    }
+    .wrapper{
+        width: 200px;
+        border: 1px solid #aaa;
+        margin: 0 auto;
+    }
+    a{
+        display: block;
+        background: #ccc;
+        height: 20px;
+        position: relative;
+    }
+    a:after{
+        content:'';
+        border: 8px solid transparent;
+        border-bottom-color:#333; 
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%,20%);
+    }
+    a.bottom:after{        
+        border-top-color:#333; 
+        border-bottom-color:transparent; 
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%,80%);
+    }
+    p{
+        float: left;
+        width: 80px;
+        font-size: 12px;
+    }
+    img{
+        float: left;
+        width:100px;
+        height: 50px;
+    }
+    .clearfix{
+        zoom: 1;
+        clear: both;
+    }
+    .clearfix::after,.clearfix::before{
+        content: '';
+        display: table;
+        clear: both;
+        overflow: hidden;        
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>妙味课堂</h2>        
+        <a href="javascirpt:;"></a>
+        <div class="ulbox">
+            <ul>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/1.jpg" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/2.jpg" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/3.jpg" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/4.jpg" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/1.png" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/2.png" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/3.png" alt=""></li>
+                <li class="clearfix"><p>文字描述文字描述文字描述文字描述文字描述文字描述</p><img src="images/4.png" alt=""></li>
+            </ul>
+        </div>        
+        <a class="bottom" href="javascirpt:;"></a>        
+    </div>
+    <script>
+    var btns = document.getElementsByTagName('a');
+    var myul = document.getElementsByTagName('ul')[0];
+    var ulbox = document.getElementsByTagName('div')[1];
+
+    var btnTop = btns[0];
+    var btnBottom = btns[1];
+    var ctop = parseInt(getStyle(myul,'top')); // ul的top值
+    var ulboxheight = parseInt(getStyle(ulbox,'height')); // ul父元素的高度
+    var ulheight = parseInt(getStyle(myul,'height')); // ul的高度
+    var len = ulheight -ulboxheight; // ul父元素和ul元素的高度差
+    var timer = null;
+
+    console.log(ctop,ulboxheight,ulheight)
+
+    btnTop.onmousedown = function(){
+        timer = setInterval(function(){
+            if(-ctop < len){
+                myul.style.top = ctop-- + 'px';
+            }else{
+                clearInterval(timer);
+            }
+        },30)
+    }
+    btnTop.onmouseup = function(){
+        clearInterval(timer);
+    }
+    btnBottom.onmouseup = function(){
+        clearInterval(timer);
+    }
+    btnBottom.onmousedown = function(){
+        timer = setInterval(function(){
+            if(ctop < 0){
+                myul.style.top = ctop++ + 'px';
+            }else{
+                clearInterval(timer);
+            }
+        },30)
+    }
+
+    // js通用方法
+    function getStyle(obj, arr){
+       return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr];
+    }
+    </script>
+</body>
+</html>
