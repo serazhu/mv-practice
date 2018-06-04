@@ -44,7 +44,7 @@
                 <li><button>-</button><span>0</span><button>+</button>单价:<em>14.5元</em>小计:<i>0元</i></li>
             </ul>
             <div>商品合计共:<i id="goodscount">0件</i>，共花费了:<i id="goodsprice">0元</i></div>
-            <div>其中最贵的商品单价是:<i id="pricemax"></i></div>
+            <div>其中商品单价最高的是:<i id="pricemax">0元</i></div>
         </div>
         <script>
         var lists = document.getElementsByTagName('li'),
@@ -56,7 +56,7 @@
         totalCount = 0,
         totalPrice = ['','','','',''],
           numPrice = 0;
-        
+        var spans = document.getElementsByTagName('span');
         for(var i = 0; i < len; i++){
             lists[i].index = i;
             fn(lists[i])
@@ -93,18 +93,26 @@
             }
         }
         function getTotalPrice(){
+            var max = 0;
+            var newarr = [];
+            // 所有商品总额
             numPrice = 0;
             for(var i = 0, len = totalPrice.length; i < len; i++){
                 if(totalPrice[i]){
                     numPrice += parseFloat(totalPrice[i]);	
                 }
+                console.log(spans[i].innerHTML)
+                if(Number(spans[i].innerHTML) > 0){
+                    console.log(newarr);
+                    newarr.push(parseFloat(ems[i].innerHTML));
+                }
             }
-            var newarr = totalPrice.concat();
+            
+           
             newarr.sort(function(a,b){return b - a})
-            var max = newarr[0];
-            var index = totalPrice.indexOf(max);	
+            max = newarr[0];
             goodsprice.innerHTML = numPrice + '元';
-            pricemax.innerHTML = ems[index].innerHTML;
+            pricemax.innerHTML =max + '元';
         }
         </script>
         </body>
