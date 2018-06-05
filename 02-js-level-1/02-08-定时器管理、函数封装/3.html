@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .wrapper{
+        width: 500px;
+        line-height: 50px;
+        border: 1px solid #333; 
+        height: 50px;
+        margin: 400px auto;   
+        position: relative;    
+    }
+    span{
+        position: absolute;
+        top:5px;
+    }
+    #bg{
+        position: absolute;
+        width: 0;
+        height: 100%;
+        background: blueviolet;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper"> 
+        <div id="bg"></div>       
+    </div>
+    <script>
+    var str = '';
+    var bg = document.getElementsByTagName('div')[1];
+    var spans = document.getElementsByTagName('span');
+    var num = 0;
+
+    for(var i = 0; i < 10; i++){
+        str += '<span style="left:' + (i+1) * 43 + 'px">+1</span>';
+    }
+    bg.innerHTML = str;
+    var len = spans.length;
+
+    function act(){
+        doMove(bg,'width',500,50);
+        changeOpacity(bg,0,5);
+        var timer = null;        
+        clearInterval(timer);
+        timer = setInterval(function(){
+            doMove(spans[num],'top',-200,10);
+            changeOpacity(spans[num],0,12);        
+            num++;     
+            if(num > len -1){
+                clearInterval(timer);
+            }
+        },100)
+    }
+    act()
+
+function changeOpacity(obj, direction, step ,fn){
+    var value =  getStyle(obj, 'opacity') * 100;
+    if(value > direction ){
+        step = -step;
+    }
+    clearInterval(obj.alpha);
+    obj.alpha = setInterval(function(){
+        value += step;
+        if(step > 0 && value > direction ||step < 0 && value < direction){
+			value = direction;	
+        }
+        obj.style.opacity = value/100;
+        if(value === direction){
+            clearInterval(obj.alpha);
+        }
+    },50)
+}
+/* @param
+ * obj进行运动的对象
+ * attr进行变化的属性
+ * direction目标位置，根据原始属性的值和direction比较，来确定step参数的正负
+ * step每次运动的长度
+ */
+function doMove(obj,attr,direction,step,fn){
+	clearInterval(obj.timer);
+	var value = parseInt(getStyle(obj,attr));	
+	if(value > direction){
+		step = -step;	
+	}
+	obj.timer = setInterval(function(){		
+		value += step;
+		if(step > 0 && value > direction ||step < 0 && value < direction){
+			value = direction;	
+		}
+		obj.style[attr] = value + 'px';
+		if(value === direction){
+			clearInterval(obj.timer);
+			fn && fn();				
+		}
+	},50)
+}
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr]; 	
+}
+</script>
+</body>
+</html>

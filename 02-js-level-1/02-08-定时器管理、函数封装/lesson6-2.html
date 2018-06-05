@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>shake未封装版</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+div{
+	width:80px;
+	height:80px;
+	position:absolute;
+	top:200px;
+	}
+img{
+	width:100%;
+	height:100%;
+	}
+</style>
+</head>
+
+<body>
+<div><img src="images/1.jpg" /></div>
+<div><img src="images/2.jpg" /></div>
+<div><img src="images/3.jpg" /></div>
+<div><img src="images/4.jpg" /></div>
+<div><img src="images/5.jpg" /></div>
+<div><img src="images/6.jpg" /></div>
+<div><img src="images/7.jpg" /></div>
+<div><img src="images/8.jpg" /></div>
+<div><img src="images/9.jpg" /></div>
+<div><img src="images/10.jpg" /></div>
+<script>
+var imgs = document.getElementsByTagName('img');
+var divs = document.getElementsByTagName('div');
+var len = imgs.length;
+var timer = null;
+var divTop = parseInt(getStyle(divs[0],'top'));
+
+for(var i = 0; i < len; i++){
+	divs[i].style.left = i* 90 + 'px';	
+	divs[i].onmouseover = shake;	
+}
+
+function shake(){	
+	var num = 10;	
+	var onOff = true;		
+	var that = this;
+	var timer = setInterval(function(){	
+				
+		if(onOff){
+			that.style.top =  (divTop + 2*num) + 'px';			
+		}else{
+			that.style.top =  (divTop - 2*num) + 'px';
+		}	
+		onOff = !onOff;	
+		num--;
+		if(num < 0){
+			that.style.top= divTop + 'px';
+			clearInterval(timer);
+		}
+	},50)
+}
+
+
+
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr];
+}
+
+</script>
+</body>
+</html>

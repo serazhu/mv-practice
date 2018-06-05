@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>定时器的管理</title>
+<style>
+div{
+	width:100px;
+	height:100px;
+	background:red;
+	position:absolute;
+	left:100px;
+	top:100px;	
+	}
+</style>
+</head>
+
+<body>
+<button>后退</button>
+<button id="btn">前进</button>
+<div></div>
+<script>
+var btn = document.getElementById('btn');
+var div = document.getElementsByTagName('div')[0];
+var btn2 = document.getElementsByTagName('button')[0];
+
+
+btn.onclick = function(){
+	move();	
+}
+btn2.onclick = function(){
+	move2();	
+}
+
+
+function move(){
+	clearInterval(div.timer);
+	var left = parseInt(getStyle(div,'left'));
+	div.timer = setInterval(function(){
+		left += 19;
+		if(left > 800){
+			left = 800;			
+		}
+		div.style.left = left + 'px';
+		if(left === 800){
+			clearInterval(div.timer);				
+		}
+	},50)
+}
+
+function move2(){
+	clearInterval(div.timer);
+	var left = parseInt(getStyle(div,'left'));
+	div.timer = setInterval(function(){
+		left -= 19;
+		if(left < 100){
+			left = 100;			
+		}
+		div.style.left = left + 'px';
+		if(left === 100){
+			clearInterval(div.timer);				
+		}
+	},50)
+}
+
+
+
+
+
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr]; 	
+}
+</script>
+</body>
+</html>

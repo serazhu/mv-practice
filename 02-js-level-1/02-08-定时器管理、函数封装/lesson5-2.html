@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>下落div未封装版</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+div{
+	width:50px;
+	height:50px;
+	background:red;
+	position:absolute;
+	top:100px;
+	}
+</style>
+</head>
+
+<body>
+<script>
+var str = '';
+var divs = document.getElementsByTagName('div');
+
+var timer1 = null;
+
+var num = 0;
+for(var i = 0; i < 20; i++){
+	str += '<div style="left:' + i * 60+ 'px"></div>'	
+}
+document.body.innerHTML = str;
+var len = divs.length;
+document.onclick = function(){ 
+  clearTimeout(timer1) 
+  timer1 = setTimeout(act,100);	
+};
+
+function act(){	
+	drop(divs[num]);
+	if(num < len - 1){
+		num++;
+		timer1 = setTimeout(act,100);
+	}else{
+		clearTimeout(timer1);	
+	}	
+}
+// 单个下落
+function drop(currentDiv){
+	var timer2 = null;
+	var top = parseInt(getStyle(currentDiv,'top'));
+	timer2 = setInterval(function(){
+		if(top > 400){
+			clearInterval(timer2);	
+		}else{
+			top = top + 20;
+			currentDiv.style.top = top + 'px';	
+		}
+	},30)	
+}
+
+
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr];
+}
+</script>
+</body>
+
+
+</html>

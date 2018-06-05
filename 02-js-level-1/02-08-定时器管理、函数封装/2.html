@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>抖动函数修复</title>
+<style>
+img{
+	width:100px;
+	position:absolute;
+	height:100px;	
+	top:100px;	
+	}
+</style>
+</head>
+
+<body>
+<script>
+var imgs = document.getElementsByTagName('img');
+var arr = ['images/1.jpg','images/2.jpg','images/3.jpg','images/4.jpg','images/5.jpg','images/6.jpg','images/7.jpg','images/8.jpg','images/9.jpg','images/10.jpg'];
+var str = '';
+for(var i = 0; i < 10; i++){
+	str += '<img style="left:' + i * 130 + 'px" src="' + arr[i] + '"/>';	
+}
+document.body.innerHTML = str;
+var len = imgs.length;
+var onOff = true;
+for(var i = 0; i < len; i++){
+	imgs[i].onmouseover = function(){
+		shake(this,'top');
+	};
+}
+
+
+
+/* @param
+ * obj进行运动的对象
+ * attr进行变化的属性
+ * fn回调函数
+ * obj.onOff设置一个开关，一次shake没有完成时，不再往下执行,知道shake完成元素回到原始位置时才往下进行
+ */
+function shake(obj,attr,fn){	
+	if(obj.onOff){return;}
+	obj.onOff = true;
+	var val = parseInt(getStyle(obj,attr));
+	var arr = [];
+	var num = 0;
+	for(var i = 20; i > 0; i-= 2){
+		arr.push(i,-i);	
+	}
+	arr.push(0);	
+	var len = arr.length;	
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		obj.style[attr] = val + arr[num] + 'px';
+		num++;
+		if(num > len - 1){
+			clearInterval(obj.timer);
+			obj.onOff = false;
+			fn && fn();
+		}
+	},30)
+}
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr]; 	
+}
+</script>
+</body>
+</html>

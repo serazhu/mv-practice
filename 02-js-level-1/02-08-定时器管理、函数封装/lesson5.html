@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>div下落</title>
+<style>
+div{
+	width:50px;
+	height:50px;
+	background:red;
+	position:absolute;	
+	top:100px;	
+	}
+</style>
+</head>
+
+<body>
+<script>
+var divs = document.getElementsByTagName('div');
+var str = '';
+var num = 0;
+for(var i = 0; i < 20; i++){	
+	str += '<div style="left:'+ i * 60 +'px"></div>'
+}
+document.body.innerHTML = str;
+
+document.onclick = function(){
+	
+	var timer = null;
+	clearInterval(timer);
+	
+	timer = setInterval(function(){
+		doMove(divs[num],'top',500,30);
+		num++;	
+		num = num % 20;
+	},50)	
+	
+}
+
+/* @param
+ * obj进行运动的对象
+ * attr进行变化的属性
+ * direction目标位置，根据原始属性的值和direction比较，来确定step参数的正负
+ * step每次运动的长度
+ */
+function doMove(obj,attr,direction,step,fn){
+	clearInterval(obj.timer);
+	var value = parseInt(getStyle(obj,attr));	
+	if(value > direction){
+		step = -step;	
+	}
+	obj.timer = setInterval(function(){		
+		value += step;
+		if(step > 0 && value > direction ||step < 0 && value < direction){
+			attr = direction;	
+		}
+		obj.style[attr] = value + 'px';
+		if(attr === direction){
+			clearInterval(obj.timer);
+			fn && fn();			
+		}
+	},50)
+}
+function getStyle(obj,arr){
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr]; 	
+}
+</script>
+</body>
+</html>
