@@ -43,17 +43,6 @@ function move(){
 		doMove(divs[num], 'top', onOff ? 500 : 0, 30, num == len - 1 ? function(){			
 			finished = true;
 		}:null);
-
-		// if(onOff){
-		// 	doMove(divs[num], 'top', 500, 30, function(){
-		// 		finished = true;	
-		// 	});
-		// }else{
-		// 	doMove(divs[num], 'top', 0, 30, function(){
-		// 		finished = true;
-		// 		if(num > len -1){alert('完成')}	
-		// 	});
-		// }
 		num++;
 		if(num > len -1){
 			clearInterval(timer);

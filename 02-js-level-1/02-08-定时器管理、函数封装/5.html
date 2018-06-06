@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            }
+        li{
+            list-style:none;
+            }
+        .wrapper{
+            width:800px;
+            height:280px;
+            border:#09F 1px solid;
+            margin:200px auto;
+            overflow:hidden;
+            }
+        .title{
+            height:50px;
+            background:#0CF;
+            border-bottom:#09F 1px solid;	
+            padding-left:300px;
+            overflow:hidden;
+        }
+        .title span{
+            background:#eee;
+            padding:10px 30px;
+            float:left;
+            margin:12px;
+            }
+        .title span.active{
+            background:#fff;
+            }
+
+
+        /* content */
+        .content{
+            padding: 20px;
+        }        
+        .bigimg{
+            width:200px;
+            height:150px;
+            border:1px solid #0CF;
+            float:left;            
+            }
+        .bigimg img{
+            width:100%;
+            height:100%;
+            }
+        .bigimg p{
+            width:100%;
+            line-height:24px;
+            background:#ccc;
+            text-align:center;
+            }
+        
+        .swiperbox{
+            float:left;
+            overflow: hidden;
+            width: 540px;
+            margin-left: 15px;
+            position: relative;	
+            height: 200px;
+            }
+            
+        .swiperbox ul{
+            width:9999px;
+            height: 150px; 
+            position: absolute;
+            left: 0;   
+            }	
+        .swiperbox li{
+            float:left;
+            width:176px;
+        }
+        .swiperbox li{
+            padding:0 7px;
+        }
+        .swiperbox li img{
+            width:100%;
+            height:80px;
+        }
+        .swiperbox li p{
+            font-size:12px;
+        }
+        h3{
+            font-size:14px;
+            }	
+            
+         /* ctrl */    
+        .ctrl{
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            }
+        .ctrl span,.ctrl p{
+            float:left;
+            }
+        .ctrl span{
+            cursor:pointer;
+            margin: 0 10px;
+            line-height: 15px;
+            }
+        .ctrl p span{
+            width:15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ccc;
+            }
+        .ctrl p span.active{
+            background: #aaa;
+            }    	        	
+        </style>
+        </head>
+        
+        <body>
+        <div class="wrapper">
+            <div class="title" id="title">
+                <span class="active">新品</span>
+                <span>极客</span>
+            </div>
+            <div class="content" id="content">
+                <div id="tab1">
+                    <div class="bigimg">
+                        <img src="images/1.jpg" />
+                        <p>新品图片</p>
+                    </div>
+                    <div class="swiperbox">                            
+                        <ul>
+                            <li>
+                                <img src="images/1.jpg" />
+                                <h3>新品图片图片1</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/2.jpg" />
+                                <h3>新品图片图片2</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/3.jpg" />
+                                <h3>新品图片图片3</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/4.jpg" />
+                                <h3>新品图片图片4</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/5.jpg" />
+                                <h3>新品图片图片5</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/6.jpg" />
+                                <h3>新品图片图片6</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/7.jpg" />
+                                <h3>新品图片图片7</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/8.jpg" />
+                                <h3>新品图片图片8</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/9.jpg" />
+                                <h3>新品图片图片9</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                            <li>
+                                <img src="images/10.jpg" />
+                                <h3>新品图片图片10</h3>
+                                <p>新品图片图片新品图片图片新品图片图片新品图片图片</p>
+                            </li>
+                        </ul>                                
+                        <div class="ctrl">
+                            <span class="btn"><</span>
+                            <p><span class="active"></span><span></span><span></span></p>
+                            <span class="btn">></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" style="display: none;">
+                    <div class="bigimg">
+                        <img src="images/1.jpg" />
+                        <p>极客图片</p>
+                    </div>
+                    <div class="swiperbox">                            
+                        <ul>
+                            <li>
+                                <img src="images/1.jpg" />
+                                <h3>极客图片1</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/2.jpg" />
+                                <h3>极客图片2</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/3.jpg" />
+                                <h3>极客图片3</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/4.jpg" />
+                                <h3>极客图片4</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/5.jpg" />
+                                <h3>极客图片5</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/6.jpg" />
+                                <h3>极客图片6</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                            <li>
+                                <img src="images/7.jpg" />
+                                <h3>极客图片7</h3>
+                                <p>极客图片极客图片极客图片极客图片极客图片</p>
+                            </li>
+                        </ul>                                
+                        <div class="ctrl">
+                            <span class="btn"><</span>
+                            <p><span></span><span></span><span></span></p>
+                            <span class="btn">></span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <script>
+        var spansTitle = document.getElementById('title').getElementsByTagName('span');
+        var tabs = document.getElementById('content').children;
+        var len = spansTitle.length;
+
+        // tab切换    
+        for(var i = 0; i < len; i++){
+            tabs[i].index = i;
+            spansTitle[i].index = i;
+            spansTitle[i].onmouseover = function(){
+                for(var i = 0; i < len; i++){
+                    spansTitle[i].className = ''; 
+                    tabs[i].style.display = 'none';
+                }
+                this.className = 'active';
+                tabs[this.index].style.display = 'block';
+            }
+        }
+        swiper('tab1', 3, 190);
+        swiper('tab2', 3, 190);
+        
+        function swiper(obj, num, wid){
+            var tab = document.getElementById(obj);
+            var ul = tab.getElementsByTagName('ul')[0];
+            var lis = tab.getElementsByTagName('li');
+            var ctrl = tab.getElementsByClassName('ctrl')[0]
+            var objP = ctrl.getElementsByTagName('p')[0];
+            var spans = objP.getElementsByTagName('span');
+            var btns = ctrl.getElementsByClassName('btn');
+            console.log(ctrl)
+            var current = 0;
+            var totalWidth = lis.length * wid;
+            var len = Math.ceil(lis.length / num); // 计算圆点的个数           
+            var str = '<span class="active"></span>';
+            for(var i = 1; i < len; i++){
+                str += '<span></span>'
+            }
+            objP.innerHTML = str;
+            
+            // 给小圆点添加点击事件
+            for(var i = 0; i < len; i++){
+                spans[i].index = i;
+                spans[i].onclick = function(){
+                    if(this.index === len - 1){
+                        doMove(ul, 'left', -(totalWidth- wid*num), 50);
+                    }else{
+                        doMove(ul, 'left', -this.index * num * wid, 50);
+                    }                    
+                    spans[current].className = '';
+                    spans[this.index].className = 'active';
+                    current = this.index;
+                }
+            }
+            
+            // 左右箭头添加点击事件
+            btns[0].onclick = function(){
+                for(var i = 0; i < len; i++){
+                    if(spans[i].className === 'active'){
+                        if(i === 0){
+                            return;
+                        }
+                        spans[i-1].click();
+                        return;
+                    }
+                }
+            }
+            btns[1].onclick = function(){                
+                for(var i = 0; i < len; i++){
+                    if(spans[i].className === 'active'){
+                        if(i === len-1){
+                            return;
+                        }
+                        spans[i+1].click();
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        // js库
+        function doMove(obj,attr,direction,step,fn){	
+	
+            var value = parseFloat(getStyle(obj,attr));	
+            
+            if(value > direction){
+                step = - step
+            }
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                    value += step;			
+                    if(step > 0 && value > direction || step < 0 &&  value < direction){
+                        value = direction;
+                    }
+                    obj.style[attr] = value + 'px';
+                    if(value === direction){
+                        clearInterval(obj.timer);
+                        fn && fn();	
+                    }
+            },50)
+        }
+
+        function getStyle(obj,attr){
+            return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+        }
+
+        
+        </script>
+        </body>
+        </html>
+        

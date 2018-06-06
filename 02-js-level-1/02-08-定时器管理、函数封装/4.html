@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+li{
+	list-style:none;
+	float:left;
+	}
+.wrapper{
+	width:500px;
+	height:300px;
+	border:3px solid #ccc;
+	margin:0 auto;	
+	overflow:hidden;
+	position:relative;
+}
+ul.img{
+	width:9999px;
+	position:relative;
+	left:0;
+	}
+img{
+	width:500px;
+	height:300px;
+	}
+.wrapper ul.text{
+	width:500px;
+	height:80px;
+	}
+.wrapper .text li{	
+	width:480px;
+	height:60px;
+	padding:10px;	
+	background:rgba(0,0,0,.6);
+	color:#fff;
+	position:absolute;
+	left:0;
+	bottom:-80px;
+	}
+h2{
+	font-size:22px;
+	line-height:40px;
+	}	
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<ul class="img">
+    	<li><img src="images/1.jpg" /></li>
+        <li><img src="images/2.jpg" /></li>
+        <li><img src="images/3.jpg" /></li>
+        <li><img src="images/4.jpg" /></li>
+        <li><img src="images/5.jpg" /></li>
+        <li><img src="images/1.jpg" /></li>
+    </ul>    
+    <ul class="text">
+        <li>
+            <h2>标题1标题1标题1标题1</h2>
+            <p>内容内容内容内容内容内容内容内容内容内容内容</p>
+        </li>
+        <li>
+            <h2>标题2标题2标题2标题2</h2>
+            <p>内容内容内容内容内容内容内容内容内容内容内容</p>
+        </li>
+        <li>
+            <h2>标题3标题3标题3标题3</h2>
+            <p>内容内容内容内容内容内容内容内容内容内容内容</p>
+        </li>
+        <li>
+            <h2>标题4标题4标题4标题4</h2>
+            <p>内容内容内容内容内容内容内容内容内容内容内容</p>
+        </li>
+        <li>
+            <h2>标题5标题5标题5标题5</h2>
+            <p>内容内容内容内容内容内容内容内容内容内容内容</p>
+        </li>
+    </ul>
+</div>
+<script>
+
+var wrapper = document.getElementsByTagName('div')[0];
+var pics = document.getElementsByTagName('ul')[0];
+var num = pics.getElementsByTagName('li').length;
+console.log(num);
+var texts = document.getElementsByTagName('ul')[1].getElementsByTagName('li');
+var timer = null;
+var timer1 = null;
+var len = parseFloat(getStyle(wrapper,'width'));
+var i = 0;
+
+
+
+function autoPlay(){
+	timer = setTimeout(function(){
+		doMove(texts[i],'bottom',0,10,function(){
+			timer1 = setTimeout(function(){
+				doMove(texts[i],'bottom',-80,10,function(){
+					doMove(pics,'left',-(i+1)*len,20,function(){					
+						i++;
+						if(i > num -2){
+							i = 0;
+							pics.style.left = 0;	
+						}
+						autoPlay();
+					})
+				});
+			},500)
+		})
+	},1500)
+}
+autoPlay()
+
+
+
+function doMove(obj,attr,direction,step,fn){	
+	
+	var value = parseFloat(getStyle(obj,attr));	
+	
+	if(value > direction){
+		step = - step
+	}
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+			value += step;			
+			if(step > 0 && value > direction || step < 0 &&  value < direction){
+				value = direction;
+			}
+			obj.style[attr] = value + 'px';
+			if(value === direction){
+				clearInterval(obj.timer);
+				fn && fn();	
+			}
+	},50)
+}
+
+function getStyle(obj,attr){
+	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+}
+</script>
+</body>
+</html>
