@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="time"></div>
+<div id="img">
+	<img src="images/0.JPG" />
+    <img src="images/0.JPG" />
+    <img src="images/0.JPG" />
+    <img src="images/0.JPG" />
+    <img src="images/0.JPG" />
+    <img src="images/0.JPG" />
+</div>
+<div id="late"></div>
+
+<label>距离：</label><input id="input1" value="November 27,2018 22:3:0" /><br />
+<label>还剩：</label><input id="input2" value="" /><button id="btn">开始倒计时吧</button>
+<script>
+var img = ['images/0.JPG','images/1.JPG','images/2.JPG','images/3.JPG','images/4.JPG','images/5.JPG','images/6.JPG','images/7.JPG','images/8.JPG','images/9.JPG','colon.JPG'];
+var arr = ['星期日','星期一','星期日二','星期三','星期四','星期五','星期六']
+var timebox = document.getElementById('time');
+var images = document.getElementsByTagName('img');
+var time, year, month, date, day, hour, minute, second;
+var late = document.getElementById('late');
+
+// 获取时间
+function getTime(){	
+	time = new Date();
+	year = time.getFullYear();
+	month = time.getMonth() + 1;
+	date = time.getDate();
+	day = time.getDay();
+	hour = time.getHours();
+	minute = time.getMinutes();
+	second = time.getSeconds();
+}
+
+// 初始化时间
+setTime();
+// 设置时间
+function setTime(){
+	getTime();
+	timebox.innerHTML = year + '年' + setZero(month) + '月' + setZero(date) + '日'+ arr[day] + setZero(hour)+ ':' + setZero(minute) + ':' +  setZero(second);
+}
+// 间隔1s执行一次
+setInterval(setTime,1000)
+
+// 设置时间图片
+function setImg(){
+	getTime();
+	var time = '' + setZero(hour) + setZero(minute) + setZero(second);
+	for(var i = 0, len = images.length; i < len; i++){
+		images[i].src = img[time[i]];	
+	}	
+}
+// 初始化时间图片
+setImg();
+// 间隔1s执行一次
+setInterval(setImg,1000);
+
+
+// 工具函数单个数前置加0 
+function setZero(item){
+	return  item > 9 ? 	item : '0' + item
+}
+
+
+
+
+/* 倒计时
+ * 获取目标时间的毫秒数
+ * 获取现在时间的毫秒数
+ * 现在时间和目标时间毫秒数的差值
+ * 计算一天的毫秒数，在和上一步的毫秒数差值进行计算
+ */
+
+
+
+//setLateTime();
+
+
+function showOverTime(obj,timeStr){
+	var targetTime = + new Date(timeStr);
+	function setLateTime(){
+	  var nowTime = + new Date();	  
+	  var value = targetTime - nowTime;
+	  
+	  var stepDay = 24 * 60 * 60 *1000;
+	  var stepHour = 60 * 60 *1000;
+	  var stepMinute = 60 *1000;
+	  var stepSecond = 1000;
+	  
+	  // 天
+	  var comday = Math.floor(value/stepDay);
+	  var value1 = value%stepDay;
+	  // 小时
+	  var comhours = Math.floor(value1/stepHour);
+	  var value2 = value1%stepHour;
+	  // 分钟
+	  var comMinute = Math.floor(value2/stepMinute);
+	  var value3 = value2%stepMinute;
+	  // 秒
+	  var comSecond = Math.floor(value3/stepSecond);	  
+	  // div时是innerHTML属性
+	  //obj.innerHTML = comday + '天' + comhours + '小时' + comMinute +'分' + comSecond +'秒';
+	  obj.value = comday + '天' + comhours + '小时' + comMinute +'分' + comSecond +'秒';
+			  
+	}
+	clearInterval(obj.timer);
+	obj.timer = setInterval(setLateTime, 1000);
+	setLateTime();
+}
+
+//showOverTime(late,'2018-06-10');
+
+
+var input1 = document.getElementById('input1');
+var input2 = document.getElementById('input2');
+var btn = document.getElementById('btn');
+
+btn.onclick = function(){
+	var value = input1.value;
+	showOverTime(input2,value);
+}
+
+</script>
+</body>
+</html>

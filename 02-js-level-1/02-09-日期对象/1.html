@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    div{
+        width: 520px;
+        margin: 0 auto;
+    }
+    img{
+        width: 60px;
+        height: 80px;
+    }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="images/0.JPG" alt="">
+        <img src="images/0.JPG" alt="">
+        <img src="images/none.jpg" alt="">
+        <img src="images/0.JPG" alt="">
+        <img src="images/0.JPG" alt="">
+        <img src="images/none.jpg" alt="">
+        <img src="images/0.JPG" alt="">
+        <img src="images/0.JPG" alt="">
+    </div>
+    <script>
+    var images = document.getElementsByTagName('img');
+    
+    setInterval(changeTime,1000);
+    function changeTime(){
+        var time = new Date();
+        var hour = addZero(time.getHours);
+        var minute = addZero(time.getMinutes);
+        var second = addZero(time.getSeconds);
+    }
+
+    function addZero(item){
+        reutrn (item > 9) ? item : '0' + item;
+    }
+    </script>
+</body>
+</html>
