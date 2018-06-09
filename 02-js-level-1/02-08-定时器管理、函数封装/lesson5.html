@@ -43,7 +43,7 @@ document.onclick = function(){
  * direction目标位置，根据原始属性的值和direction比较，来确定step参数的正负
  * step每次运动的长度
  */
-function doMove(obj,attr,direction,step,fn){
+ function doMove(obj,attr,direction,step,fn){
 	clearInterval(obj.timer);
 	var value = parseInt(getStyle(obj,attr));	
 	if(value > direction){
@@ -52,10 +52,10 @@ function doMove(obj,attr,direction,step,fn){
 	obj.timer = setInterval(function(){		
 		value += step;
 		if(step > 0 && value > direction ||step < 0 && value < direction){
-			attr = direction;	
+			value = direction;	
 		}
 		obj.style[attr] = value + 'px';
-		if(attr === direction){
+		if(value === direction){
 			clearInterval(obj.timer);
 			fn && fn();			
 		}

@@ -10,41 +10,157 @@
         padding: 0;
         margin: 0;
     }
-    div{
+    li{
+        list-style: none;
+        float: left;
+        position: relative;
+        width: 60px;
+        height: 80px;
+    }
+    .wrapper{
         width: 520px;
         margin: 0 auto;
+        height: 80px;
+        overflow: hidden;
     }
     img{
         width: 60px;
         height: 80px;
+        float: left;
+    }
+    .wrapper div{
+        width: 60px;
+        position: absolute;
+        top:0;
+        left: 0;
     }
     </style>
 </head>
 <body>
-    <div>
-        <img src="images/0.JPG" alt="">
-        <img src="images/0.JPG" alt="">
-        <img src="images/none.jpg" alt="">
-        <img src="images/0.JPG" alt="">
-        <img src="images/0.JPG" alt="">
-        <img src="images/none.jpg" alt="">
-        <img src="images/0.JPG" alt="">
-        <img src="images/0.JPG" alt="">
+    <div class="wrapper">
+        <ul>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+                
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+            </li>
+            <li>
+                <div>
+                    <img src="images/0.JPG" alt="">
+                    <img src="images/0.JPG" alt=""> 
+                </div>
+            </li>
+        </ul>
     </div>
     <script>
     var images = document.getElementsByTagName('img');
     
-    setInterval(changeTime,1000);
-    function changeTime(){
-        var time = new Date();
-        var hour = addZero(time.getHours);
-        var minute = addZero(time.getMinutes);
-        var second = addZero(time.getSeconds);
+    var arr = ['images/0.JPG','images/1.JPG','images/2.JPG','images/3.JPG','images/4.JPG','images/5.JPG','images/6.JPG','images/7.JPG','images/8.JPG','images/9.JPG','images/d.JPG','images/none.JPG']
+    var lis = document.getElementsByTagName('li');
+    var onOff = true;
+
+    function changeTime(){        
+        var num = 0;
+        var time = new Date();        
+        var hour = addZero(time.getHours());
+        var minute = addZero(time.getMinutes());
+        var second = addZero(time.getSeconds());
+        var timeStr = '' + hour + ':' +  minute + ':' +  second;
+        console.log(timeStr);
+        // 21:47:30
+        function cutImg(li, liIndex){
+            var divele = li.getElementsByTagName('div')[0];
+            var imgele = li.getElementsByTagName('img');
+            if(timeStr.charAt(liIndex) === ':'){
+                imgele[0].src = 'images/d.JPG';
+                setTimeout(function(){
+                    imgele[0].src = 'images/none.JPG';
+                },500)
+            }else{
+                imgele[1].src = 'images/' + timeStr.charAt(liIndex) + '.JPG';                
+                if(imgele[0].src != imgele[1].src){
+                    doMove(divele,'top',-80,15,function(){
+                        imgele[0].src = imgele[1].src
+                        divele.style.top = 0 + 'px';
+                    })
+                }
+            }            
+        }
+        for(var i = 0, len = lis.length; i < len; i++){
+            cutImg(lis[i],i)
+        }              
     }
 
+    setInterval(changeTime,1000)
+    
     function addZero(item){
-        reutrn (item > 9) ? item : '0' + item;
+        return  item > 9 ? 	item : '0' + item
     }
+    changeTime()
+
+/* @param
+ * obj进行运动的对象
+ * attr进行变化的属性
+ * direction目标位置，根据原始属性的值和direction比较，来确定step参数的正负
+ * step每次运动的长度
+ */
+function doMove(obj,attr,direction,step,fn){
+	clearInterval(obj.timer);
+	var value = parseInt(getStyle(obj,attr));	
+	if(value > direction){
+		step = -step;	
+	}
+	obj.timer = setInterval(function(){		
+		value += step;
+		if(step > 0 && value > direction ||step < 0 && value < direction){
+			value = direction;	
+		}
+		obj.style[attr] = value + 'px';
+		if(value === direction){
+			clearInterval(obj.timer);
+			fn && fn();			
+		}
+	},50)
+}
+function getStyle(obj,arr){    
+	return obj.currentStyle ? obj.currentStyle[arr] : getComputedStyle(obj)[arr]; 	
+}
     </script>
 </body>
 </html>
