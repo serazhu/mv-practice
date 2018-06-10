@@ -18,7 +18,7 @@
 </div>
 <div id="late"></div>
 
-<label>距离：</label><input id="input1" value="November 27,2018 22:3:0" /><br />
+<label>距离：</label><input id="input1" value="June 10,2018 20:31:0" /><br />
 <label>还剩：</label><input id="input2" value="" /><button id="btn">开始倒计时吧</button>
 <script>
 var img = ['images/0.JPG','images/1.JPG','images/2.JPG','images/3.JPG','images/4.JPG','images/5.JPG','images/6.JPG','images/7.JPG','images/8.JPG','images/9.JPG','colon.JPG'];
@@ -78,9 +78,6 @@ function setZero(item){
  * 现在时间和目标时间毫秒数的差值
  * 计算一天的毫秒数，在和上一步的毫秒数差值进行计算
  */
-
-
-
 //setLateTime();
 
 
@@ -108,8 +105,12 @@ function showOverTime(obj,timeStr){
 	  var comSecond = Math.floor(value3/stepSecond);	  
 	  // div时是innerHTML属性
 	  //obj.innerHTML = comday + '天' + comhours + '小时' + comMinute +'分' + comSecond +'秒';
-	  obj.value = comday + '天' + comhours + '小时' + comMinute +'分' + comSecond +'秒';
-			  
+	  
+	  if(value > 0){
+		obj.value = comday + '天' + comhours + '小时' + comMinute +'分' + comSecond +'秒';
+	  }else{
+		clearInterval(obj.timer); 
+	  }		  
 	}
 	clearInterval(obj.timer);
 	obj.timer = setInterval(setLateTime, 1000);
@@ -117,7 +118,6 @@ function showOverTime(obj,timeStr){
 }
 
 //showOverTime(late,'2018-06-10');
-
 
 var input1 = document.getElementById('input1');
 var input2 = document.getElementById('input2');

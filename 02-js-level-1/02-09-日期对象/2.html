@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    table{
+        border-collapse: collapse;
+    }
+    li{
+        list-style: none;
+        float: left;        
+        margin-left: 10px;
+        position: relative;
+        width: 190px;
+        height: 200px;
+    }
+    img{
+        width: 100px;
+        height: 120px;
+    }
+    .wrapper{
+        width: 800px;
+        margin: 0 auto;
+    }
+    h1{
+        font-size:16px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    ul{
+        height: 300px;
+    }
+    li div.product{
+        font-size: 12px;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+    li h3{
+        font-size: 14px;
+    }
+    h3 span{
+        color: red;
+    }
+    p{
+        font-size: 12px;
+        color: #888;
+    }
+    table{
+        font-size: 12px;
+        width: 100%;
+    }
+    thead{
+        background: plum;
+        line-height: 24px;        
+    }
+    thead td{
+        padding-left: 20px;
+    }
+    tbody{
+        border-top: 2px solid #fff;
+        background: plum
+    }
+    tbody td{
+        padding-left: 20px;
+    }
+    tbody img{
+        border:1px solid #000;
+        width: 100px;
+        height: 70px;
+        vertical-align: middle;
+    }
+    tbody tr{
+        line-height: 100px;
+    }
+    tbody tr td:first-child div{
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>限购时间</h1>
+        <ul>
+            <li>
+                <div class="product">
+                    <input type="text" value="June 10,2018 22:30:0"> <button>确定</button>
+                    <p>剩余00天00时00分00秒</p>
+                    <img src="images/1.png" alt="">
+                    <div>1商品描述商品描述商品描述</div>
+                    <h3>抢购价：<span>￥599.00</span></h3>
+                </div>                
+            </li>
+            <li>
+                <div class="product">
+                    <input type="text" value="June 10,2018 22:32:0"> <button>确定</button>
+                    <p>剩余00天00时00分00秒</p>
+                    <img src="images/2.png" alt="">
+                    <div>2商品描述商品描述商品描述</div>
+                    <h3>抢购价：<span>￥1.00</span></h3>
+                </div>                
+            </li>
+            <li>
+                <div class="product">
+                    <input type="text" value="June 10,2018 22:33:0"> <button>确定</button>
+                    <p>剩余00天00时00分00秒</p>
+                    <img src="images/3.png" alt="">
+                    <div>3商品描述商品描述商品描述</div>
+                    <h3>抢购价：<span>￥3299.00</span></h3>
+                </div>                
+            </li>
+            <li>
+                <div class="product">
+                    <input type="text" value="June 10,2018 22:34:0"> <button>确定</button>
+                    <p>剩余00天00时00分00秒</p>
+                    <img src="images/4.png" alt="">
+                    <div>4商品描述商品描述商品描述</div>
+                    <h3>抢购价：<span>￥168.00</span></h3>
+                </div>
+            </li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        商品名称
+                    </td>
+                    <td width="360">
+                        价钱
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div>1商品描述商品描述商品描述1商品描述商品描述商品描述</div></td>
+                    <td>599.00</td>
+                    <td><img src="images/1.png" alt=""></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>总价：599.00</div>
+    </div>
+    
+    <script>
+    var lis = document.getElementsByTagName('li');
+    var divs = document.getElementsByClassName('product');    
+    function countTime(currentLi){
+        var btn = currentLi.getElementsByTagName('button')[0];
+        var input = currentLi.getElementsByTagName('input')[0];
+        var p = currentLi.getElementsByTagName('p')[0];
+        var timer = null;
+        btn.onclick = function(){
+            function getTime(){
+                var value = input.value,
+                      now = new Date(),
+                      set = new Date(value),
+                        t = set - now;
+                var times = 24 * 60 * 60 * 1000; // 86400000
+                if(t < 0){
+                    clearInterval(timer);
+                    //shake(currentLi,'left',10);
+                    return;
+                }
+                var str = toTwo(Math.floor(t/86400000)) +  '天' + toTwo(Math.floor(t%86400000/3600000)) +'小时' + toTwo(Math.floor(t%86400000%3600000/60000)) + '分' + toTwo(Math.floor(t%86400000%3600000%60000/1000)) + '秒';
+                p.innerHTML = str;
+            }
+            clearInterval(timer);
+            timer = setInterval(getTime,1000);
+        }
+    }
+    for(var i = 0, len = lis.length; i < len; i++){
+        countTime(lis[i]);
+    }
+    function toTwo(item){
+        return item > 9 ? item : '0' + item;
+    }
+
+    function shake(obj,attr,fn){
+        var arr = [];
+        for(var i = 10; i > 0; i -= 2){
+            arr.push(i,-i)         
+        } 
+        arr.push(0); 
+        var num = 0;
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function(){
+            obj.style[attr] = arr[num] + 'px';
+            num++;
+            if(num >= arr.length){
+                clearInterval(obj.timer); 
+                fn && fn();
+            }
+        },60)
+    }
+
+    shake(divs[0],'left',function(){
+        divs[0].style.display = 'none';
+    })
+ 
+    </script>
+</body>
+</html>
