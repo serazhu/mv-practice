@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	font-size:12px;
+	}
+li{
+	list-style:none;
+	}
+.wrapper{
+	margin: 0 auto;
+	padding:10px;
+	border:5px solid #ccc;
+	width:704px;
+	height:204px;
+	}
+textarea{
+	width:300px;
+	height:200px;
+	border:1px dashed #996600;
+	float:left;
+	}
+#text1{
+	background:#FC0;
+	}
+#text2{
+	background:#6CF;
+	width:300px;
+	height:200px;
+	border:1px dashed #996600;
+	float:left;
+	}
+.showbox{
+	width:100px;
+	float:left;
+	text-align:center;
+	}	
+.showbox p{
+	line-height:36px;
+	display:none;
+	}
+button{
+	background:#F36;
+	width:80px;
+	border:none;
+	line-height:40px;
+	color:#fff;
+	}
+button:hover{
+	background:#C30;	
+}
+ul{
+	margin-left:10px;
+	display:none;
+	}
+ul li{
+	width:6px;
+	height:6px;
+	float:left;
+	background:#F60;
+	margin: 0 2px;
+	}
+ul li.active{
+	background:#C3C;
+	}
+</style>
+</head>
+
+<body>
+	<div class="wrapper">
+    	<textarea id="text1"></textarea>
+        <div class="showbox">
+        	<button>把文字右移</button>
+            <p><span>0</span>/<span>0</span></p>
+            <ul>
+            	<li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div id="text2"></div>
+    </div>
+    
+    <script>
+    var btn = document.getElementsByTagName('button')[0];
+	var text1 = document.getElementById('text1');
+	var text2 = document.getElementById('text2');
+	var spans = document.getElementsByTagName('span');
+	var p = document.getElementsByTagName('p')[0];
+	var ul = document.getElementsByTagName('ul')[0];
+	var lis = document.getElementsByTagName('li');
+	var onOff = true;
+	btn.onclick = function(){		
+		if(!onOff){return}
+		onOff = false;
+		text2.innerHTML = '';
+		var value = text1.value;
+		var len = value.length;
+		var timer = null;
+		var num = 0;
+		if(len === 0){
+			alert('请输入些文字');
+			return;	
+		}
+		spans[1].innerHTML = len;
+		changeOpacity(btn,30,10);
+		p.style.display = 'block';
+		ul.style.display = 'block';
+		clearInterval(timer);
+		timer = setInterval(function(){			
+			text2.innerHTML += 	value.substring(0,1);
+			spans[0].innerHTML = (text2.innerHTML).length;
+			value = value.substring(1);
+			console.log(value)
+			text1.value = value;
+			console.log(num%lis.length);
+			for(var i = 0,len = lis.length; i < len; i++){
+				lis[i].className = '';
+			}
+			lis[num%lis.length].className = 'active';
+			num++;
+			if(value.length === 0){
+				clearInterval(timer);
+				changeOpacity(btn,100,10,function(){
+					changeOpacity(ul,0,10);
+					onOff = true;
+				});					
+			}
+		},100)			
+	}
+	
+	
+	function changeOpacity(obj,dest,step,fn){
+		var value = getStyle(obj,'opacity') * 100;
+		if(value > dest){
+			console.log(step)
+			step = -step;	
+		}
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function(){
+			if(step > 0 && value > dest || step < 0 && value < dest){
+				value = dest
+			}
+			value += step;
+			obj.style.opacity = value/100;
+			console.log(step)
+			if(value === dest){
+				clearInterval(obj.timer);
+				fn && fn();	
+			}
+		},50)
+	}
+	
+	function getStyle(obj,attr){
+		return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+			
+	}
+    </script>
+</body>
+</html>
