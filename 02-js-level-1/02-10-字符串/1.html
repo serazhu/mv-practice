@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+a{
+	text-decoration:none;
+	}
+.clearfix{
+	*zoom:1;
+	}
+.clearfix:before,.clearfix:after{
+	content:'';
+	display:table;
+	overflow:hidden;
+	clear:both;
+	}
+.wrapper{
+	width:660px;
+	height:500px;
+	background:#FC9;
+	margin:0 auto;
+	padding:30px;
+	}	
+p{
+	background:#fff;
+	width:500px;
+	height:320px;
+	padding:12px;
+	line-height:24px;
+	float:left;
+	}
+dl{
+	float:right;
+	line-height:30px;
+	width:80px;
+	text-align:center;
+	cursor:pointer;
+	}	
+dt{
+	background:#ccc;
+	}
+dd{
+	background:#aaa;
+	margin-top:1px;
+	display:none;
+	}
+dd:hover{
+	background:#F90;
+	}
+	
+.box{
+	width:490px;
+	height:100px;
+	padding:12px;
+	border:5px solid #F30;
+	background:#fff;
+	margin-top:10px;
+	position:relative;
+	display:none;	
+	}
+	
+.title{
+	line-height:30px;
+	border-bottom:2px solid #F09;
+	}
+.title a{
+	float:left;
+	width:100px;
+	color:#000;
+	text-align:center;
+	}
+.title a.active{
+	font-weight:bold;
+	color:#fff;
+	background:#F09;
+	}
+.searchbox{
+	margin-top:20px;
+	}
+.searchbox input{
+	width:150px;
+	line-height:24px;
+	margin-right:5px;
+	}
+.searchbox button{
+	width:50px;
+	line-height:24px;
+	}	
+i{
+	position:absolute;
+	right:0px;
+	top:0px;
+	font-style:normal;
+	cursor:pointer;
+	padding:6px;
+	}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="clearfix">
+  
+  
+      <p class="text">妙味课堂是一支充满温馨并且极富人情味的IT培训团队；2010-2011年，妙味深度关注WEB前端开发领域，为此精心研发出一套灵活而充满趣味的JavaScript课程。2011-2013年，妙味精准研发出最新HTML5\CSS3课程，并推出远程培训课程方案，尝试将线下优良的培训模式移植到远程网络培训中，希望尽最大努力，将一种快乐愉悦的授课体验、结合HTML\CSS\JS知识点，精准传递给妙味课堂的每一位学员。</p>
+      <dl>
+          <dt>展开</dt>
+          <dd>查找</dd>
+          <dd>替换</dd>
+      </dl>
+  </div>
+  <div class="box">
+  	<div class="title clearfix">
+    	<a class="active" href="">查找</a>
+        <a href="">替换</a>
+    </div>
+    <div>
+    	<div class="searchbox">
+        	<input /><button>查找</button>
+        </div>
+        <div class="searchbox" style="display:none;">
+        	<input /><input /><button>替换</button>
+        </div>
+    </div>
+    <i>x</i>
+  </div>
+</div>
+<script>
+var btnShow = document.getElementsByTagName('dt')[0];
+var btns = document.getElementsByTagName('dd');
+var close = document.getElementsByTagName('i')[0];
+var box = document.getElementsByClassName('box')[0];
+var searchs = document.getElementsByTagName('a');
+var searchboxes = document.getElementsByClassName('searchbox');
+var inputs = document.getElementsByTagName('input');
+var btnActs = document.getElementsByTagName('button');
+var texts = document.getElementsByTagName('p')[0];
+var text = texts.innerHTML;
+
+function showBox(){
+	box.style.display = 'block';
+	btns[0].style.display = 'none';
+	btns[1].style.display = 'none';	
+}
+function showSearch(){
+	searchboxes[0].style.display = 'block';	
+	searchs[0].className = 'active';
+	searchboxes[1].style.display = 'none';	
+	searchs[1].className = '';
+	return false;	
+}
+function showReplace(){
+	texts.innerHTML = text;	
+	searchboxes[0].style.display = 'none';	
+	searchs[0].className = '';
+	searchboxes[1].style.display = 'block';	
+	searchs[1].className = 'active';
+	return false;	
+}
+btnShow.onclick = function(){
+	btns[0].style.display = 'block';
+	btns[1].style.display = 'block';	
+}
+btns[0].onclick = function(){	
+	showBox();
+	showSearch();		
+}
+btns[1].onclick = function(){
+	showBox();
+	showReplace()
+		
+}
+close.onclick = function(){
+	box.style.display = 'none';	
+}
+
+searchs[0].onclick = showSearch;
+
+searchs[1].onclick = showReplace;
+
+
+btnActs[0].onclick = function(){
+	
+	var value = inputs[0].value;
+	var spans = texts.getElementsByTagName('span');
+	var spanslen = spans.length;
+	texts.innerHTML = text;	
+	inputs[0].value = '';
+	var len = value.length;
+	var index = 0;
+	var arr = [];
+	var str = '';
+	if(!len){
+		alert('请输入要查找的内容');
+		return;
+	}
+	while(text.indexOf(value,index) > -1){
+		arr.push(text.indexOf(value,index));
+		index += text.indexOf(value,index) + len;				
+	}
+	if(arr.length === 0){
+		alert('对不起，没有找到您输入的【' + value + '】');
+	}
+	str = text.substring(0,arr[0]);
+	
+	for(var i = 0, arrlen = arr.length; i < arrlen; i++){
+		str +=  '<span style="background:yellow;">' + text.substring(arr[i],arr[i]+len ) + '</span>' + text.substring(arr[i]+len,arr[i+1]);
+	}
+	texts.innerHTML = str;
+	
+}
+
+btnActs[1].onclick = function(){	
+	var value1 = inputs[1].value;
+	var value2 = inputs[2].value;
+	inputs[1].value = '';
+	inputs[2].value = '';
+	var str = '';
+	var index = 0;
+	var arr = [];
+	var len = value1.length;
+	var len2 = value2.length;
+	if(!len){
+		alert('请输入要替换的内容');
+		return;
+	}
+	while(text.indexOf(value1,index) > -1){
+		arr.push(text.indexOf(value1,index));
+		index += text.indexOf(value1,index) + len;				
+	}
+	if(arr.length === 0){
+		alert('对不起，没有找到您输入的【' + value1 + '】');
+	}
+	if(len2 === 0){
+		alert('确定要删除【' + value1 + '】');
+	}
+	str = text.substring(0,arr[0]);
+	result = len2-len;
+	for(var i = 0, arrlen = arr.length; i < arrlen; i++){
+		var textnew = text.replace(text.substring(arr[i]+ i*result,arr[i]+len+i*result),value2);
+		text = textnew;
+	}
+	text = textnew;
+	texts.innerHTML = text;
+}
+</script>
+</body>
+</html>
