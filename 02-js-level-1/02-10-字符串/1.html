@@ -107,9 +107,7 @@ i{
 
 <body>
 <div class="wrapper">
-  <div class="clearfix">
-  
-  
+  <div class="clearfix">  
       <p class="text">妙味课堂是一支充满温馨并且极富人情味的IT培训团队；2010-2011年，妙味深度关注WEB前端开发领域，为此精心研发出一套灵活而充满趣味的JavaScript课程。2011-2013年，妙味精准研发出最新HTML5\CSS3课程，并推出远程培训课程方案，尝试将线下优良的培训模式移植到远程网络培训中，希望尽最大努力，将一种快乐愉悦的授课体验、结合HTML\CSS\JS知识点，精准传递给妙味课堂的每一位学员。</p>
       <dl>
           <dt>展开</dt>
@@ -140,9 +138,9 @@ var close = document.getElementsByTagName('i')[0];
 var box = document.getElementsByClassName('box')[0];
 var searchs = document.getElementsByTagName('a');
 var searchboxes = document.getElementsByClassName('searchbox');
-var inputs = document.getElementsByTagName('input');
-var btnActs = document.getElementsByTagName('button');
-var texts = document.getElementsByTagName('p')[0];
+var inputs = document.getElementsByTagName('input'); // 查找替换项里的输入框
+var btnActs = document.getElementsByTagName('button'); // 查找替换按钮
+var texts = document.getElementsByTagName('p')[0]; // 被操作的文本段落
 var text = texts.innerHTML;
 
 function showBox(){
@@ -186,70 +184,56 @@ searchs[0].onclick = showSearch;
 
 searchs[1].onclick = showReplace;
 
-
-btnActs[0].onclick = function(){
-	
-	var value = inputs[0].value;
-	var spans = texts.getElementsByTagName('span');
-	var spanslen = spans.length;
-	texts.innerHTML = text;	
+// 查找按钮
+btnActs[0].onclick = function(){	
+	var value = inputs[0].value; // 查找项输入框的值
 	inputs[0].value = '';
 	var len = value.length;
-	var index = 0;
-	var arr = [];
-	var str = '';
+
 	if(!len){
 		alert('请输入要查找的内容');
 		return;
 	}
-	while(text.indexOf(value,index) > -1){
-		arr.push(text.indexOf(value,index));
-		index += text.indexOf(value,index) + len;				
-	}
-	if(arr.length === 0){
+	
+	if(text.indexOf(value) < 0){
 		alert('对不起，没有找到您输入的【' + value + '】');
 	}
-	str = text.substring(0,arr[0]);
 	
-	for(var i = 0, arrlen = arr.length; i < arrlen; i++){
-		str +=  '<span style="background:yellow;">' + text.substring(arr[i],arr[i]+len ) + '</span>' + text.substring(arr[i]+len,arr[i+1]);
-	}
-	texts.innerHTML = str;
-	
+	var arr = text.split(value);	
+	texts.innerHTML = arr.join('<span style="background:yellow">' + value + '</span>');	
 }
-
+// 替换按钮
 btnActs[1].onclick = function(){	
 	var value1 = inputs[1].value;
 	var value2 = inputs[2].value;
 	inputs[1].value = '';
 	inputs[2].value = '';
-	var str = '';
-	var index = 0;
-	var arr = [];
+	var sure = null;
 	var len = value1.length;
 	var len2 = value2.length;
+
 	if(!len){
 		alert('请输入要替换的内容');
 		return;
 	}
-	while(text.indexOf(value1,index) > -1){
-		arr.push(text.indexOf(value1,index));
-		index += text.indexOf(value1,index) + len;				
-	}
-	if(arr.length === 0){
+	
+	if(text.indexOf(value1) < 0){
 		alert('对不起，没有找到您输入的【' + value1 + '】');
+		return;
 	}
-	if(len2 === 0){
-		alert('确定要删除【' + value1 + '】');
+
+	// 当替换内容为空时，删除需要替换的文字
+	if(len > 0 && len2 === 0){
+		sure = confirm('确定要删除【' + value1 + '】');
 	}
-	str = text.substring(0,arr[0]);
-	result = len2-len;
-	for(var i = 0, arrlen = arr.length; i < arrlen; i++){
-		var textnew = text.replace(text.substring(arr[i]+ i*result,arr[i]+len+i*result),value2);
-		text = textnew;
+
+	if(sure){
+		texts.innerHTML = texts.innerHTML.split(value1).join('');		
 	}
-	text = textnew;
-	texts.innerHTML = text;
+
+	var arr = text.split(value1);
+	texts.innerHTML = arr.join(value2);
+	text = texts.innerHTML;
 }
 </script>
 </body>
