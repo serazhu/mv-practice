@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+.wrapper{
+	width:500px;
+	margin:200px auto;
+	}	
+.text{
+	width:480px;
+	border:1px solid #ccc;
+	height:100px;
+	overflow:auto;
+	padding:10px;
+	}
+select{
+	margin: 20px 0;
+	}	
+textarea{
+	width:480px;
+	height:100px;
+	overflow:auto;
+	padding:10px;
+	}
+p div{
+	display:inline-block;
+	position:relative;
+	height:36px;
+	width:20px;
+	}
+p span{
+	display:inline-block;
+	height:16px;
+	width:20px;
+	}
+button{
+	margin-top:20px;
+	}
+		
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<p class="text"></p>
+    <select>
+    	<option value="2">默认字体</option>
+        <option value="0">爱心字体</option>
+        <option value="1">笑脸字体</option>
+    </select>
+    <div>
+    	<textarea></textarea>
+    </div>
+    
+    <button>确定</button>
+</div>
+
+<script>
+var textshow = document.getElementsByTagName('p')[0];
+var text = document.getElementsByTagName('textarea')[0];
+var btn = document.getElementsByTagName('button')[0];
+var select = document.getElementsByTagName('select')[0];
+var type = select.value;
+var result = '';
+var imgarr = ['images/heart.gif','images/smile.png'];
+
+
+btn.onclick = function(){
+	var value = text.value;	
+	text.value = '';
+	var len = value.length;
+	var str = '';
+	var arr = [];
+	if(len === 0){
+		alert('请输入文字后点击发送按钮');	
+	}
+	if(type == 2){
+		textshow.innerHTML = value;
+	}else if(type == 0){
+		showImg(0)
+		
+	}else if(type == 1){
+		showImg(1)	
+	}
+	
+	function showImg(num){
+		arr = value.split('');
+		for(var i = 0; i < len; i++){
+			arr[i] = '<div><img src="' + imgarr[num] + '"><span>' + arr[i] + '</span></div>';
+		}
+		for(var i = 0; i < len; i++){
+			str += arr[i]; 
+		}		
+		textshow.innerHTML += str;
+	}	
+}
+
+select.onchange = function(){
+	type = this.value;	
+}
+
+
+</script>
+</body>
+</html>

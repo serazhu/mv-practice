@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 数组原型添加indexOf方法，所有的数组实例都可以继承该方法
+Array.prototype.indexOf = function(item){
+	var len = this.length;
+	for(var i = 0; i < len; i++){
+		if(this[i] === item){
+			return i;	
+		}	
+	}
+	return -1;	
+}
+
+var arr1 = [1,2,3,4];
+console.log(arr1.indexOf(2));
+
+// 数组原型添加indexOf方法，所有的数组实例都可以继承该方法
+function genNum(){
+	var arr = [];
+	var num = 0;
+	
+	while(arr.length < 100){
+		num = Math.floor(Math.random()*1001);	
+		if(arr.indexOf(num)<0){
+			arr.push(num)	
+		}	
+	}
+	return arr;
+}
+console.log(genNum(),genNum().sort())
+</script>
+</body>
+</html>
+</body>
+</html>

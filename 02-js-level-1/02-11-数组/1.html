@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+body{
+	background:#eee;
+	}
+.wrapper{
+	width:1048px;
+	margin:0 auto;
+	text-align:center;
+	}
+.wrapper div{
+	
+	margin:20px auto;
+	
+	}
+button{
+	background:#096;
+	color:#fff;
+	line-height:30px;
+	text-align:center;
+	width:80px;
+	border:none;
+	}
+li{
+	list-style:none;
+	padding:10px;
+	background:#fff;
+	float:left;
+	margin:1px;
+	}
+img{
+	width:240px;
+	height:120px;
+	}
+h2{
+	text-align:center;
+	line-height:36px;
+	background:#ccc;
+	}
+.clearfix{
+	*zoom:1;
+	}
+.clearfix:after{
+	content:'';
+	display:table;
+	clear:both;
+	overflow:hidden;
+	}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<div>
+    	<button>从大到小</button>
+        <button>打乱顺序</button>
+    </div>
+    <ul class="clearfix">
+    	<li>
+        	<img src="images/1.jpg" />
+            <h2>111</h2>
+        </li>
+        <li>
+        	<img src="images/2.jpg" />
+            <h2>222</h2>
+        </li>
+        <li>
+        	<img src="images/3.jpg" />
+            <h2>333</h2>
+        </li>
+        <li>
+        	<img src="images/4.jpg" />
+            <h2>444</h2>
+        </li>
+        <li>
+        	<img src="images/5.jpg" />
+            <h2>555</h2>
+        </li>
+        <li>
+        	<img src="images/6.jpg" />
+            <h2>666</h2>
+        </li>
+        <li>
+        	<img src="images/7.jpg" />
+            <h2>777</h2>
+        </li>
+        <li>
+        	<img src="images/8.jpg" />
+            <h2>888</h2>
+        </li>
+    </ul>
+</div>
+<script>
+var ul = document.getElementsByTagName('ul')[0];
+var lis = document.getElementsByTagName('li');
+var len = lis.length;
+var btns = document.getElementsByTagName('button');
+var arr = [0,1,2,3,4,5,6,7];
+var lisArr = [];
+var originArr = [];
+var onOff = true;
+getArr();
+for(var i = 0, len = lis.length; i < len; i++){
+	lis[i].index = i;	
+	originArr.push(lis[i]);
+}
+
+function getArr(){
+	lisArr = [];
+	for(var i = 0, len = lis.length; i < len; i++){
+		lis[i].index = i;	
+		lisArr.push(lis[i]);
+	}
+}
+
+
+btns[0].onclick = function(){
+	setBig();
+}
+btns[1].onclick = function(){
+	setRandom();
+}
+
+function setBig(){
+	onOff = !onOff;
+	ul.innerHTML = '';
+	originArr.reverse();
+	for(var i = 0; i < len; i++){
+		ul.appendChild(originArr[i]);
+	}
+	if(onOff){
+		btns[0].innerHTML = '从大到小';
+	}else{
+		btns[0].innerHTML = '从小到大';
+	}
+}
+
+function setRandom(){
+	ul.innerHTML = '';	
+	for(var i = 0; i < len; i++){
+		var num = getNum(len-i);
+		ul.appendChild(lisArr[arr[num]]);
+		arr.splice(num,1);
+	}
+	arr = [0,1,2,3,4,5,6,7];
+	getArr();
+		
+}
+function getNum(num){
+	return Math.floor(Math.random()*num)	
+}
+</script>
+</body>
+</html>

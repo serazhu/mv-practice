@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+img{
+	width:120px;
+	height:60px;
+	vertical-align:top;
+	}
+ul{
+	width:260px;
+	margin:200px auto;
+	}
+li{
+	height:60px;
+	overflow:hidden;
+	width:120px;
+	margin:5px;
+	float:left;
+	position:relative;
+	}
+li div{
+	position:absolute;
+	left:0;
+	top:0;
+	}
+</style>
+</head>
+
+<body>
+<ul>
+	<li><div><img src="images/1.jpg" /><img src="images/2.jpg" /></div></li>
+	<li><div><img src="images/3.jpg" /><img src="images/4.jpg" /></div></li>
+    <li><div><img src="images/5.jpg" /><img src="images/6.jpg" /></div></li>
+    <li><div><img src="images/7.jpg" /><img src="images/8.jpg" /></div></li>
+    <li><div><img src="images/9.jpg" /><img src="images/10.jpg" /></div></li>
+    <li><div><img src="images/11.jpg" /><img src="images/12.jpg" /></div></li>
+    <li><div><img src="images/13.jpg" /><img src="images/14.jpg" /></div></li>
+    <li><div><img src="images/a.png" /><img src="images/b.png" /></div></li>
+</ul>
+
+<script>
+var divs = document.getElementsByTagName('div');
+var len = divs.length;
+var timer = null;
+
+timer = setInterval(function(){
+	act();	
+},500)
+
+
+function act(){
+	var num = Math.floor(Math.random()*(len-1));
+	moveImg(divs[num]);	
+}
+
+function moveImg(item){
+	var topVal = parseInt(getStyle(item, 'top'));
+	if(topVal === 0){
+		doMove(item,'top',-60,5)
+	}else{
+		doMove(item,'top',0,5)
+	}	
+}
+
+function doMove(obj,attr,dest,step,fn){
+	var value = parseInt(getStyle(obj,attr));
+	if(value > dest){
+		step = -step;	
+	}
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		value += step;
+		if(step < 0 && value < dest || step > 0 && value > dest){
+			value = dest;	
+		}
+		obj.style[attr] = value + 'px';
+		if(value === dest){
+			clearInterval(obj.timer); 
+			fn && fn();
+		}
+	},20)
+}
+
+function getStyle(obj, attr){
+	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];	
+}
+
+</script>
+</body>
+</html>

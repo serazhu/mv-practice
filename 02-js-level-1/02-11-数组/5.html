@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+	padding:0;
+	margin:0;
+	}
+.wrapper{
+	text-align:center;
+		
+}
+#box{
+	width:800px;
+	height:450px;
+	border:1px solid #39C;
+	margin:50px auto;
+	position:relative;
+	top:0;
+	left:0;
+	}
+#box .scroe{	
+	position:absolute;
+	width:160px;
+	height:60px;
+	padding:10px 0;
+	border:1px solid #39C;
+	background:#FC6;
+	left:-162px;
+	top:-1px;
+	}
+#box h3{	
+	font-style:normal;
+	line-height:30px;
+	font-size:16px;
+}
+
+#box img{	
+	position:absolute;
+	left:0;
+	top:0;
+	width:24px;
+	height:24px;
+}
+h2{
+	line-height:50px;
+	}
+p{
+	line-height:30px;
+	padding:20px 0;
+	}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+	<h2>你的鼠标有多快？</h2>
+    <p>游戏说明：点击“开始游戏”，随机掉下QQ表情，把鼠标划上去，千万别让它掉下去！！<br />划掉25个算你赢；掉下5个算你输 :)</p>
+    <button>开始游戏</button>
+    <div id="box">
+    	<div class="scroe">
+        	<h3>得分：0</h3>
+            <h3>失分：0</h3>
+        </div>
+        <div class="img">
+        	
+        </div>
+    </div>
+</div>
+<script>
+var box = document.getElementById('box');
+var imgs = document.getElementsByClassName('img')[0];
+var scores = document.getElementsByTagName('h3');
+var btn = document.getElementsByTagName('button')[0];
+
+var timer = null
+var arr = ['images/1.png','images/2.png','images/3.png','images/4.png','images/5.png','images/6.png','images/7.png','images/8.png','images/9.png','images/10.png','images/11.png'];
+var len = arr.length;
+var w = parseInt(getStyle(box,'width')) - 24;
+var h = parseInt(getStyle(box,'height')) -24;
+var numWin = 0;
+var numLose = 0;
+var time = 0;
+
+btn.onclick = function(){
+	this.disabled = 'disabled';
+	this.innerHTML = '游戏正在进行中'
+	act();
+	clearInterval(timer);
+	timer = setInterval(act,3000);	
+}
+
+function act(){
+	time++;
+	addImg();	
+	var img = document.getElementsByTagName('img')[0];
+	doMove(img,'top',h,time,30,function(){
+		img.style.display = 'none';	
+		numLose++;
+		scores[1].innerHTML = '失分：' + numLose;
+		
+		shake(box,'top',20,function(){
+			if(numLose === 5){
+				alert('不好意思你输了，游戏结束');	
+				timer = clearInterval(timer);
+				init();
+			}	
+		});	
+	});
+	img.onmouseover = function(){		
+		img.src = 'images/qq.png';	
+		shake(img,'left',14,function(){
+			img.style.display = 'none';	
+			numWin++;
+			scores[0].innerHTML = '得分：' + numWin;
+			if(numWin === 25){
+				alert('恭喜，你赢了');
+				timer = clearInterval(timer);
+				init();
+			}	
+		})
+	}
+}
+
+
+function init(){
+	numWin= 0;
+	numLose = 0;
+	btn.disabled = '';
+	btn.innerHTML = '开始游戏';
+	scores[0].innerHTML = '得分：' + numWin;
+	scores[1].innerHTML = '失分：' + numWin;
+}
+function addImg(){
+	imgs.innerHTML = '<img style="top:0;left:' + randomNum(w)+ 'px" src="' + arr[randomNum(len-1)]+ '"/>';
+}
+
+
+function shake(obj,attr,strong,fn){
+	if(obj.onOff){return;}
+	obj.onOff = true;
+	var value = parseInt(getStyle(obj,attr));	
+	var arr = [];
+	var num = 0;
+	for(var i = strong; i > 0; i-=2){
+		arr.push(i,-i)	
+	}
+	arr.push(0);
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		obj.style[attr] = (value + arr[num]) + 'px';
+		num++;
+		if(num >= arr.length){
+			clearInterval(obj.timer);
+			fn && fn();	
+			obj.onOff = false;
+		}	
+	},50)
+}
+
+function randomNum(w){
+	return Math.floor(Math.random()*(w+1));
+}
+
+function doMove(obj,attr,dest,step,delay,fn){
+	var value = parseInt(getStyle(obj,attr));
+	if(value > dest){
+		step = -step;	
+	}
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		value += step;
+		if(step < 0 && value < dest || step > 0 && value > dest){
+			value = dest;	
+		}
+		obj.style[attr] = value + 'px';
+		if(value === dest){
+			clearInterval(obj.timer); 
+			fn && fn();
+		}
+	},delay)
+}
+
+function getStyle(obj,attr){	
+	console.log(getComputedStyle(obj)[attr])
+	return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];		
+}
+
+</script>
+</body>
+</html>
