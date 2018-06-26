@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"><button>留言</button><button>批量删除</button>
+    <ul></ul>
+</body>
+<script>
+    var text = document.getElementsByTagName('input')[0];
+    var btns = document.getElementsByTagName('button');
+    var eleul = document.getElementsByTagName('ul')[0];
+    var elelis = document.getElementsByTagName('li');
+
+    btns[0].onclick = function(){
+        var val = text.value;
+        if(val === ''){
+            alert('请输入留言内容');
+            return;
+        }
+        var eleli = document.createElement('li');
+        eleli.innerHTML = val;
+        text.value = '';
+        if(eleul.children[0]){
+            eleul.insertBefore(eleli,eleul.children[0]);
+        }else{
+            eleul.appendChild(eleli);
+        }
+    }
+    
+    for(var i = 0, len = elelis.length; i < len; i++){
+        alert(1);
+        elelis[i].onclick = function(){
+            
+            this.style.background = 'yellow';
+
+        }
+    }
+</script>
+</html>
