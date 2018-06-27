@@ -14,7 +14,7 @@
         <li class="box1">4444444444</li>
         <li>55555555555</li>
     </ul>
-    <div class="box"></div>
+    <div class="box">div</div>
     <script>
     getElementsByClassName(document, '*', 'box, box1');
 
@@ -27,6 +27,15 @@
         var len = objarr.length;
         if(len > 1){
             for(var i = 0; i < len; i++){
+                for(var j = 0; j < arr.length; j++){                    
+                    if(objarr[i].getElementsByClassName(arr[j])){
+                        var selectarr = objarr[i].getElementsByClassName(arr[j]);
+                        for(var k = 0; k < selectarr.length; k++){
+                            selectarr[k].style.background = 'red';
+                        }
+                    }
+                    
+                }
             }
         }
     }
