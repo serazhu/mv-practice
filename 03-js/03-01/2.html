@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    li.active{
+        background:yellow;
+    }
+    </style>
 </head>
 <body>
     <input type="text"><button>留言</button><button>批量删除</button>
@@ -32,13 +37,21 @@
         }
     }
     
-    for(var i = 0, len = elelis.length; i < len; i++){
-        alert(1);
-        elelis[i].onclick = function(){
-            
-            this.style.background = 'yellow';
-
+    eleul.onclick = function(e){
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if(target.tagName === 'LI'){
+            target.className === 'active' ? target.className = '' : target.className = 'active';
         }
     }
+
+    btns[1].onclick = function(){
+        for(var i = 0, len = elelis.length; i < len; i++){
+            if(elelis[i].className === 'active'){
+                eleul.removeChild(elelis[i]);
+            }
+        }
+    }
+
 </script>
 </html>
