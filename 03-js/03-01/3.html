@@ -8,35 +8,41 @@
 </head>
 <body>
     <ul>
-        <li>111111111</li>
-        <li class="box">2222222222</li>
+        <li class="box3 box5">111111111</li>
+        <li class="box box2">2222222222</li>
         <li>33333333333</li>
         <li class="box1">4444444444</li>
-        <li>55555555555</li>
+        <li class="box6">55555555555</li>
     </ul>
     <div class="box">div</div>
     <script>
     getElementsByClassName(document, '*', 'box, box1');
 
     function getElementsByClassName(obj, tagName, className){
-        var arr = className.split(',');        
-        for(var i = 0, len = arr.length; i < len; i++){
-            arr[i] = arr[i].trim()
-        }
+
+        // 被选中的class名,组成的数组
+        var arr = className.split(','); 
+
+        // 被选中的标签名,组成的类数组
         var objarr = obj.getElementsByTagName(tagName);
-        var len = objarr.length;
-        if(len > 1){
-            for(var i = 0; i < len; i++){
-                for(var j = 0; j < arr.length; j++){                    
-                    if(objarr[i].getElementsByClassName(arr[j])){
-                        var selectarr = objarr[i].getElementsByClassName(arr[j]);
-                        for(var k = 0; k < selectarr.length; k++){
-                            selectarr[k].style.background = 'red';
-                        }
+        var objlen = objarr.length;       
+        var selectarr = [];
+
+        // 比较objarr每项的的className和arr每项的值是否相等，相等即包含class名即可被选中
+        for(var i = 0, len = arr.length; i < len; i++){
+            arr[i] = arr[i].trim();
+            for(var j = 0; j < objlen; j++){
+                var classarr = objarr[j].className.split(' ');
+                for(var k = 0, classlen = classarr.length; k < classlen; k++){
+                    if(classarr[k] === arr[i]){
+                        selectarr.push(objarr[j]);
                     }
-                    
                 }
             }
+        }
+        
+        for(var i = 0, len = selectarr.length; i < len; i++){
+            selectarr[i].style.background = 'red'
         }
     }
     </script>
