@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>返回顶部</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body{
+        height: 2000px;
+    }
+    #gotop{
+        width: 50px;
+        height: 50px;
+        background:red;
+        position: fixed;
+        right:10px;
+        bottom: 10px;
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="gotop"></div>
+    <script>
+    var eletop = document.getElementById('gotop');
+    window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log(eletop)
+        if(scrollTop > 400){
+            eletop.style.display = 'block';
+        }else{
+            eletop.style.display = 'none';
+        }
+    }
+    top.onclick = function(){
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+
+    }
+    </script>
+</body>
+</html>
