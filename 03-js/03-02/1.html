@@ -14,6 +14,27 @@
         span{
             position: relative;
         }
+        p{
+            width:600px;
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -300px;
+        }
+        span i{
+            position: absolute;
+            left: 0;
+            bottom: -30px;
+            display: block;
+            background: #FFFFCA;
+            color:#000;
+            line-height: 30px;
+            padding: 0 10px;
+            border: 1px solid #000;
+            white-space: nowrap;
+            display: none;
+            z-index: 99;
+        }
     </style>
 </head>
 
@@ -35,14 +56,36 @@
     var titles =  document.getElementsByTagName('span');
     var len = titles.length;
     for(var i = 0; i < len; i++){
-        var title = titles[i].attributes.title;
+        var title = titles[i].getAttribute('title');
         if(title){
             titles[i].style.color = 'green';
+            var tips = document.createElement('i');
+            tips.innerHTML = title;
+            titles[i].appendChild(tips);
+            titles[i].onmouseover = function(){
+                this.getElementsByTagName('i')[0].style.display = 'block';
+                if(getPos(this.getElementsByTagName('i')[0]).top + 26 > document.body.scrollTop + document.documentElement.clientHeight){
+                    this.getElementsByTagName('i')[0].style.bottom = '20px';
+                }  
+            }
+            titles[i].onmouseout = function(){
+                this.getElementsByTagName('i')[0].style.display = 'none';
+            }
         }else{
             titles[i].style.color = 'red'
         }
     }
 
+    function getPos(obj){
+        var pos = {left:0,top:0};
+        while(obj){
+            pos.left += obj.offsetLeft;
+            pos.top += obj.offsetTop;          
+            obj = obj.offsetParent;            
+        }        
+        return pos;
+    }
+    
 
 </script>
 </html>

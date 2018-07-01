@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="data.js"></script>
+    <style>
+		*{
+            padding: 0;
+            margin: 0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .wrapper{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h2{
+            float: left;
+            line-height:30px;
+            font-size:16px;
+            font-weight: normal;
+            color:#000;
+            width: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #title{
+            height: 30px;
+            border-bottom: 1px solid orange;
+        }
+        h2.active{
+            background: orange;
+            color: #fff;
+        }
+
+        li{
+            line-height: 36px;
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+            position: relative;
+        }
+        ul.hide{
+            display: none;
+        }
+	</style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="title"></div>
+
+    </div>
+     <script>
+        var titlebox = document.getElementById('title');
+        var wrapper = document.getElementsByTagName('div')[0];
+        var uls = document.getElementsByTagName('ul');
+        var tabs = document.getElementsByTagName('h2'); 
+        var len = data.length;
+        
+        // 生成标题
+        for(var i = 0; i < len; i++){
+            var title = document.createElement('h2');
+            title.innerHTML = data[i].name;
+            titlebox.appendChild(title);
+            var ulbox = document.createElement('ul');
+
+            // 生成列表
+            for(var j = 0, len1 = data[i].list.length; j < len1; j++){
+                var list = document.createElement('li');
+                list.innerHTML = data[i].list[j].title;
+                ulbox.appendChild(list);
+            }
+            wrapper.appendChild(ulbox);
+        }
+        titlebox.children[0].className = 'active';
+        uls[1].className = 'hide';
+        
+        var divbox = document.createElement('div');
+        var divtitle = document.createElement('h3');
+        divtitle.innerHTML = data[0].list.company;
+        // 鼠标点击切换        
+        for(var i = 0; i < len; i++){
+            tabs[i].index = i;
+            var num = 1;            
+            tabs[i].onclick = function(){
+                for(var i = 0; i < len; i++){
+                    uls[i].className = 'hide';
+                    tabs[i].className = '';
+                }
+                uls[this.index].className = '';
+                tabs[this.index].className = 'active';
+            } 
+        }
+       
+        
+    </script>   
+</body>
+</html>
