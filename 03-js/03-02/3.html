@@ -16,7 +16,7 @@
         }
         .wrapper{
             width: 1000px;
-            margin: 0 auto;
+            margin: 200px auto;
         }
         
         h2{
@@ -44,24 +44,44 @@
             color: blue;
             text-decoration: underline;
             cursor: pointer;
-            position: relative;
         }
         ul.hide{
             display: none;
+        }
+        #jobbox{
+            width: 400px;
+            height: 200px;
+            border: 2px solid orange;
+            position: absolute; 
+            background: #fff;
+            padding: 5px;
+            display: none;           
+        }
+        #jobbox .arrow{
+            width: 11px;
+            height: 17px;
+            position: absolute;
+            left: -11px;
+            top: 150px; 
+            background: url('arrow.png') no-repeat;  
         }
 	</style>
 </head>
 <body>
     <div class="wrapper">
         <div id="title"></div>
-
+        <div id="jobbox">
+            <i class="arrow"></i>
+        </div>
     </div>
      <script>
         var titlebox = document.getElementById('title');
         var wrapper = document.getElementsByTagName('div')[0];
         var uls = document.getElementsByTagName('ul');
         var tabs = document.getElementsByTagName('h2'); 
+        var jobs = document.getElementsByTagName('a');
         var len = data.length;
+        var jobbox = document.getElementById('jobbox');
         
         // 生成标题
         for(var i = 0; i < len; i++){
@@ -73,17 +93,16 @@
             // 生成列表
             for(var j = 0, len1 = data[i].list.length; j < len1; j++){
                 var list = document.createElement('li');
-                list.innerHTML = data[i].list[j].title;
+                list.innerHTML = '<a href="javascript:;">' + data[i].list[j].title + '</a>';
                 ulbox.appendChild(list);
+                
             }
             wrapper.appendChild(ulbox);
         }
         titlebox.children[0].className = 'active';
         uls[1].className = 'hide';
         
-        var divbox = document.createElement('div');
-        var divtitle = document.createElement('h3');
-        divtitle.innerHTML = data[0].list.company;
+
         // 鼠标点击切换        
         for(var i = 0; i < len; i++){
             tabs[i].index = i;
@@ -98,7 +117,23 @@
             } 
         }
        
-        
+
+        for(var i = 0, jobslen = jobs.length; i < jobslen; i++){
+            jobs[i].onmouseover = function(){
+                jobbox.style.left = this.offsetWidth + this.offsetLeft + 17 + 'px';
+                jobbox.style.top = this.offsetTop - 150 + 'px';
+                jobbox.style.display = 'block';
+                changeText();
+            }
+            jobs[i].onmouseout = function(){
+                jobbox.style.display = 'none';
+            }
+
+        }
+
+        function changeText(){
+
+        }
     </script>   
 </body>
 </html>
