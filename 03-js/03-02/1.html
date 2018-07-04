@@ -35,6 +35,9 @@
             display: none;
             z-index: 99;
         }
+        span i span{
+            color: red;
+        }
     </style>
 </head>
 
@@ -54,6 +57,7 @@
 </body>
 <script>
     var titles =  document.getElementsByTagName('span');
+    var tiptitles = document.getElementsByTagName('i');
     var len = titles.length;
     for(var i = 0; i < len; i++){
         var title = titles[i].getAttribute('title');
@@ -75,6 +79,8 @@
             titles[i].style.color = 'red'
         }
     }
+    tiptitles[0].innerHTML = '<span>JavaScript</span>是一门很热门的语言';
+
 
     function getPos(obj){
         var pos = {left:0,top:0};
